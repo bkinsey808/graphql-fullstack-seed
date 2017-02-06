@@ -29,7 +29,7 @@ const resolvers = {
       }];
     }
   }
-}
+};
 
 export default makeExecutableSchema({
   typeDefs,
