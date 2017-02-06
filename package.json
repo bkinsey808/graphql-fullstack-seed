@@ -1,0 +1,25 @@
+{
+  "name": "angular-offline-first-graphql",
+  "version": "0.0.1",
+  "description": "an experiment to try to bring offline-first capability to an angular apollo graphql application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "angular",
+    "ngrx",
+    "apollo",
+    "offline-first",
+    "graphql",
+    "typeorm",
+    "service-worker",
+    "postgres",
+    "postgresql",
+    "couchdb",
+    "pouchdb",
+    "pubsub"
+  ],
+  "author": "Ben Kinsey",
+  "license": "ISC"
+}
