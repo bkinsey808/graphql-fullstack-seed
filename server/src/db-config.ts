@@ -1,4 +1,5 @@
 import { ConnectionOptions } from 'typeorm';
+import { AppUser } from './entity/AppUser';
 
 
 const connectionOptions: ConnectionOptions = {
@@ -11,7 +12,7 @@ const connectionOptions: ConnectionOptions = {
     port: 5432, // env var: PGPORT
   },
   entities: [
-    __dirname + '/entity/*.ts' // here we load all entities from entity directory
+    AppUser
   ],
   autoSchemaSync: true
 };
