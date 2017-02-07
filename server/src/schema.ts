@@ -9,12 +9,13 @@ const gql = x => x;
 
 const typeDefs = gql`
   type User {
-    id: Int!
+    id: ID!
     firstName: String
     lastName: String
   }
   type Query {
     users: [User]
+    user(id: ID): User
   }
   schema {
     query: Query
@@ -24,11 +25,17 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     async users(root, args, context) {
-      const users = await context.connection
+      return await context.connection
         .getRepository(AppUser)
         .createQueryBuilder('user')
         .getMany();
-      return users;
+    },
+    async user(root, args, context) {
+      return await context.connection
+        .getRepository(AppUser)
+        .createQueryBuilder('user')
+        .where(`user.id = :id`, { id: parseInt(args.id, null) })
+        .getOne();
     }
   }
 };
