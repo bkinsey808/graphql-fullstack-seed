@@ -34,7 +34,7 @@ const resolvers = {
       return await context.connection
         .getRepository(AppUser)
         .createQueryBuilder('user')
-        .where(`user.id = :id`, { id: parseInt(args.id, null) })
+        .where(`user.id = :id`, { id: args.id })
         .getOne();
     }
   }
