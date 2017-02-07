@@ -1,4 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
+import { AppUser } from './entity/AppUser';
 
 
 // currently gql tag is implemented as noop. The reason why I do this is I can 
@@ -22,30 +23,12 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    users(root, args, context) {
-      // to run a query we can acquire a client from the pool,
-      // run a query on the client, and then return the client to the pool
-      context.pool.connect((err, client, done) => {
-        if (err) {
-          return console.error('error fetching client from pool', err);
-        }
-        client.query('SELECT $1::int AS number', ['1'], (err2, result) => {
-          // call `done()` to release the client back to the pool
-          done();
-
-          if (err2) {
-            return console.error('error running query', err2);
-          }
-          console.log(result.rows[0].number);
-          // output: 1
-        });
-      });
-
-      return [{
-        id: 1,
-        firstName: 'Ben',
-        lastName: 'Kinsey!'
-      }];
+    async users(root, args, context) {
+      const users = await context.connection
+        .getRepository(AppUser)
+        .createQueryBuilder('user')
+        .getMany();
+      return users;
     }
   }
 };
