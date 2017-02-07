@@ -9,13 +9,13 @@ const gql = x => x;
 
 const typeDefs = gql`
   type User {
-    id: ID!
+    id: Int!
     firstName: String
     lastName: String
   }
   type Query {
     users: [User]
-    user(id: ID): User
+    user(id: Int): User
   }
   schema {
     query: Query
