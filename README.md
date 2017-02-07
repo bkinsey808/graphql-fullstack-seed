@@ -8,7 +8,7 @@ Entire project is architected in TypeScript, and long term goal would be to leve
 and ngrx actions and models. Not really sure how possible all of this is. Your feedback is most welcome.
 
 ## Client
-Angular CLI. Eventually with ngrx, Apollo Client. Goal is to keep GraphQL queries co-located with contain components yet keep state sanely managed by ngrx.
+Angular CLI. Eventually with ngrx, Apollo Client. Goal is to keep GraphQL queries co-located with container components yet keep state sanely managed by ngrx.
 It is an open question if ngrx store should be somehow combined with Apollo Client store implemented with redux, but this is not an immediate concern.
 
 ## Service worker
