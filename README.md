@@ -9,7 +9,7 @@ and ngrx actions and models. Not really sure how possible all of this is. Your f
 
 ## Getting started
 This project uses a postgres db, but "should" be compatible with any db TypeORM supports. https://typeorm.github.io/databases-and-drivers.html
-Set up the db username and password in server/db-config.js . TypeORM will create the db schema for you.git
+Set up the db username and password in server/db-config.js . TypeORM will create the db schema for you.
 
 ## Client
 Angular CLI. Eventually with ngrx, Apollo Client. Goal is to keep GraphQL queries co-located with container components yet keep state sanely managed by ngrx.
