@@ -7,6 +7,10 @@ running Apollo GraphQL server.
 Entire project is architected in TypeScript, and long term goal would be to leverage TypeORM to help build GraphQL schema, resolvers, 
 and ngrx actions and models. Not really sure how possible all of this is. Your feedback is most welcome.
 
+## Getting started
+This project uses a postgres db, but "should" be compatible with any db TypeORM supports. https://typeorm.github.io/databases-and-drivers.html
+Set up the db username and password in server/db-config.js . TypeORM will create the db schema for you.git
+
 ## Client
 Angular CLI. Eventually with ngrx, Apollo Client. Goal is to keep GraphQL queries co-located with container components yet keep state sanely managed by ngrx.
 It is an open question if ngrx store should be somehow combined with Apollo Client store implemented with redux, but this is not an immediate concern.
