@@ -9,7 +9,7 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "lib": ["es2015", "dom"]
+    "lib": ["es2015", "dom", "es2015.reflect"]
   },
   "exclude": [
     "node_modules",

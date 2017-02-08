@@ -1,14 +1,13 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import * as pg from 'pg';
 import {
   graphqlExpress,
   graphiqlExpress
 } from 'graphql-server-express';
+import { createConnection } from 'typeorm';
 
 import schema from './schema';
-import connectionOptions from './db-config';
-import { createConnection } from 'typeorm';
+import connectionOptions from './connectionOptions';
 
 
 const context = {

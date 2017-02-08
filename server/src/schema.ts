@@ -1,6 +1,6 @@
 import { makeExecutableSchema } from 'graphql-tools';
 import { AppUser } from './entity/AppUser';
-
+import { getEntityTypeDefs } from './getEntityTypeDefs';
 
 // currently gql tag is implemented as noop. The reason why I do this is I can 
 // get syntax highlighting using Kumar Harsh's GraphQL for VSCode syntax highlighting extension.
@@ -53,9 +53,7 @@ const resolvers = {
   },
   Mutation: {
     async createUser(root, args, context) {
-      const user = new AppUser();
-      user.firstName = args.firstName;
-      user.lastName = args.lastName;
+      const user = new AppUser(args);
       await context.connection.entityManager.persist(user);
       return user;
     },

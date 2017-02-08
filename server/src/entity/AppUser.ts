@@ -16,4 +16,8 @@ export class AppUser {
 
   @Column('string', { nullable: true })
   lastName: string;
+
+  constructor(properties = {}) {
+    Object.assign(this, properties);
+  }
 }

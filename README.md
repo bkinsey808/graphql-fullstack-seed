@@ -8,7 +8,7 @@ Entire project is architected in TypeScript, and long term goal would be to leve
 and ngrx actions and models. Not really sure how possible all of this is. Your feedback is most welcome.
 
 ## Getting started
-This project uses postgres as the db. Set up the db username and password in server/db-config.js . TypeORM will create the db schema for you.
+This project uses postgres as the db. Set up the db username and password in server/connectionOptions.js . TypeORM will create the db schema for you.
 
 ## Client
 Angular CLI. Eventually with ngrx, Apollo Client. Goal is to keep GraphQL queries co-located with container components yet keep state sanely managed by ngrx.
