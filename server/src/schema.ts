@@ -1,6 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
 import { AppUser } from './entity/AppUser';
-import { getEntityTypeDefs } from './getEntityTypeDefs';
 
 // currently gql tag is implemented as noop. The reason why I do this is I can 
 // get syntax highlighting using Kumar Harsh's GraphQL for VSCode syntax highlighting extension.
