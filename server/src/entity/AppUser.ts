@@ -4,7 +4,21 @@ import {
   Column
 } from 'typeorm';
 
+import { EntityApi } from '../api';
 
+
+@EntityApi({
+  typeName: 'User',
+  queries: [
+    { index: { all: true } },
+    { details: { all: true } },
+  ],
+  mutations: [
+    { create: { all: true } },
+    { update: { all: true } },
+    { delete: { all: true } },
+  ]
+})
 @Entity()
 export class AppUser {
 
@@ -21,3 +35,5 @@ export class AppUser {
     Object.assign(this, properties);
   }
 }
+
+// console.log(Reflect.getMetadata('EntityApiDecorator', AppUser));
