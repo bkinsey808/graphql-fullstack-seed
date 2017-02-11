@@ -4,24 +4,23 @@ import {
   Column
 } from 'typeorm';
 
-import { EntityApi } from '../api';
+import { EntityApi, ColumnApi } from '../api';
 
 
 @EntityApi({
-  typeName: 'User',
+  typeName: 'user',
   queries: [
-    { index: { all: true } },
-    { details: { all: true } },
-  ],
-  mutations: [
-    { create: { all: true } },
-    { update: { all: true } },
-    { delete: { all: true } },
+    { pattern: 'index', type: 'query', access: 'all'},
+    { pattern: 'details', type: 'query', access: 'all'},
+    { pattern: 'create', type: 'mutation', access: 'all'},
+    { pattern: 'update', type: 'mutation', access: 'all'},
+    { pattern: 'delete', type: 'mutation', access: 'all'},
   ]
 })
 @Entity()
 export class AppUser {
 
+  /*@ColumnApi({read: 'all', write: 'all'})*/
   @PrimaryColumn('int', { generated: true })
   id: number;
 
