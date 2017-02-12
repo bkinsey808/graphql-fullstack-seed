@@ -6,7 +6,7 @@ import {
 
 import { EntityApi } from '../api';
 
-
+// just a no-op so I can use GraphQL for VSCode extension for syntax highlighting
 const gql = x => x.join();
 
 @EntityApi({
