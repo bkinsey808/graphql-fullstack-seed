@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor';
 
-export class OfflineFirstGraphqlClientPage {
+export class AngularOfflineFirstGraphqlClientPage {
   navigateTo() {
     return browser.get('/');
   }

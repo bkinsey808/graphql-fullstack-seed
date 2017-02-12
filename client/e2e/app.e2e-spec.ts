@@ -1,10 +1,10 @@
-import { OfflineFirstGraphqlClientPage } from './app.po';
+import { AngularOfflineFirstGraphqlClientPage } from './app.po';
 
-describe('offline-first-graphql-client App', function() {
-  let page: OfflineFirstGraphqlClientPage;
+describe('angular-offline-first-graphql-client App', function() {
+  let page: AngularOfflineFirstGraphqlClientPage;
 
   beforeEach(() => {
-    page = new OfflineFirstGraphqlClientPage();
+    page = new AngularOfflineFirstGraphqlClientPage();
   });
 
   it('should display message saying app works', () => {
