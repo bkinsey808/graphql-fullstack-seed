@@ -4,23 +4,76 @@ import {
   Column
 } from 'typeorm';
 
-import { EntityApi, ColumnApi } from '../api';
+import { EntityApi } from '../api';
 
+
+const gql = x => x.join();
 
 @EntityApi({
-  typeName: 'user',
-  queries: [
-    { pattern: 'index', type: 'query', access: 'all'},
-    { pattern: 'details', type: 'query', access: 'all'},
-    { pattern: 'create', type: 'mutation', access: 'all'},
-    { pattern: 'update', type: 'mutation', access: 'all'},
-    { pattern: 'delete', type: 'mutation', access: 'all'},
-  ]
+  entityTypeDef: gql`
+    type User {
+      id: Int!
+      firstName: String
+      lastName: String
+    }
+  `,
+  queries: [{
+    typeDef: gql`users: [User]`,
+    async resolver(root, args, context) {
+      return await context.connection
+        .getRepository(AppUser)
+        .createQueryBuilder('user')
+        .getMany();
+      }
+  }, {
+    typeDef: gql`user(id: Int): User`,
+    async resolver(root, args, context) {
+      return await context.connection
+        .getRepository(AppUser)
+        .findOneById(args.id);
+    }
+  }],
+  mutations: [{
+    typeDef: gql`createUser(
+        firstName: String!, 
+        lastName: String!
+      ): User`,
+    async resolver(root, args, context) {
+      return await context.connection
+        .getRepository(AppUser)
+        .createQueryBuilder('user')
+        .getMany();
+    }
+  }, {
+    typeDef: gql`deleteUser(
+        id: Int!
+      ): Boolean`,
+    async resolver(root, args, context) {
+      const repository = context.connection.getRepository(AppUser);
+      const user = await repository.findOneById(args.id);
+      if (!user) { throw new Error('No user found'); }
+      await repository.remove(user);
+      return true;
+    }
+  }, {
+    typeDef: gql`updateUser(
+        id: Int!
+        firstName: String
+        lastName: String
+      ): User`,
+    async resolver(root, args, context) {
+      const repository = context.connection.getRepository(AppUser);
+      const user = await repository.findOneById(args.id);
+      if (!user) { throw new Error('No user found'); }
+      Object.assign(user, args);
+      await repository.persist(user);
+      return user;
+    }
+  }]
 })
 @Entity()
 export class AppUser {
 
-  /*@ColumnApi({read: 'all', write: 'all'})*/
   @PrimaryColumn('int', { generated: true })
   id: number;
 
@@ -34,5 +87,3 @@ export class AppUser {
     Object.assign(this, properties);
   }
 }
-
-// console.log(Reflect.getMetadata('EntityApiDecorator', AppUser));
