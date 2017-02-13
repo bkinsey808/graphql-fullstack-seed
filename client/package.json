@@ -1,7 +1,5 @@
 {
   "name": "angular-offline-first-graphql-client",
-  "version": "0.0.0",
-  "license": "MIT",
   "angular-cli": {},
   "scripts": {
     "ng": "ng",

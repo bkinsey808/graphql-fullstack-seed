@@ -7,7 +7,9 @@
     "commit": "git-cz",
     "server-dev": "cd server && node_modules/.bin/nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'node_modules/.bin/ts-node' src/server.ts",
     "server-build-prod": "cd server && tsc",
-    "server-run-prod": "node server/dist/server.js"
+    "server-run-prod": "node server/dist/server.js",
+    "client-dev": "cd client && ng serve",
+    "client-build-prod": "cd client && ng build --prod --aot"
   },
   "keywords": [
     "angular",
@@ -24,7 +26,7 @@
     "pubsub"
   ],
   "author": "Ben Kinsey",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "commitizen": "^2.9.5",
     "cz-conventional-changelog": "^1.2.0"

@@ -1,5 +1,6 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import * as path from 'path';
 import {
   graphqlExpress,
   graphiqlExpress
@@ -38,4 +39,5 @@ const PORT = 3000;
 express()
   .use('/graphql', bodyParser.json(), appGraphqlExpress)
   .use('/graphiql', appGraphiqlExpress)
+  .use('/', express.static(path.join(__dirname, '../../client/dist')))
   .listen(PORT);
