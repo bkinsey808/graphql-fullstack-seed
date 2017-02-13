@@ -7,7 +7,6 @@ import {
 import { createConnection } from 'typeorm';
 import { getApiSchema } from 'typeorm-graphql-api';
 
-// import schema from './schema';
 import connectionOptions from './connectionOptions';
 import { AppUser } from './entity/AppUser';
 
