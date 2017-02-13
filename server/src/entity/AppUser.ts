@@ -4,7 +4,7 @@ import {
   Column
 } from 'typeorm';
 
-import { EntityApi } from '../api';
+import { EntityApi } from 'typeorm-graphql-api';
 
 // just a no-op so I can use GraphQL for VSCode extension for syntax highlighting
 const gql = x => x.join();
