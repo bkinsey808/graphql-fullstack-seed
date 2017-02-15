@@ -39,5 +39,9 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "capitalize": "^1.0.0",
+    "pluralize": "^3.1.0"
   }
 }

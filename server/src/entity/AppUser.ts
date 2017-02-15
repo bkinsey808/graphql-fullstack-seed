@@ -4,12 +4,20 @@ import {
   Column
 } from 'typeorm';
 
-import { EntityApi } from 'typeorm-graphql-api';
+import {
+  EntityApi,
+  ColumnApi,
+  getIndexQuery,
+  getDetailsQuery
+} from '../typeorm-graphql-api';
+
 
 // just a no-op so I can use GraphQL for VSCode extension for syntax highlighting
 const gql = x => x.join();
 
 @EntityApi({
+  apiName: 'user',
+  apiDescription: 'people who use our system',
   entityTypeDef: gql`
     type User {
       id: Int!
@@ -17,22 +25,10 @@ const gql = x => x.join();
       lastName: String
     }
   `,
-  queries: [{
-    typeDef: gql`users: [User]`,
-    async resolver(root, args, context) {
-      return await context.connection
-        .getRepository(AppUser)
-        .createQueryBuilder('user')
-        .getMany();
-      }
-  }, {
-    typeDef: gql`user(id: Int): User`,
-    async resolver(root, args, context) {
-      return await context.connection
-        .getRepository(AppUser)
-        .findOneById(args.id);
-    }
-  }],
+  queries: [
+    getIndexQuery,
+    getDetailsQuery
+  ],
   mutations: [{
     typeDef: gql`createUser(
         firstName: String!, 
@@ -74,12 +70,28 @@ const gql = x => x.join();
 @Entity()
 export class AppUser {
 
+  @ColumnApi({
+    apiName: 'id',
+    apiType: 'Int'
+  })
   @PrimaryColumn('int', { generated: true })
   id: number;
 
+  @ColumnApi({
+   apiName: 'firstName',
+   apiType: 'String',
+   updatable: true,
+   requiredForCreate: true
+  })
   @Column('string', { nullable: true })
   firstName: string;
 
+  @ColumnApi({
+   apiName: 'lastName',
+   apiType: 'String',
+   updatable: true,
+   requiredForCreate: true
+  })
   @Column('string', { nullable: true })
   lastName: string;
 
