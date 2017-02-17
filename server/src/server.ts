@@ -6,7 +6,7 @@ import {
   graphiqlExpress
 } from 'graphql-server-express';
 import { createConnection } from 'typeorm';
-import { getApiSchema } from './typeorm-graphql-api';
+import { getApiSchema } from 'typeorm-graphql-api';
 
 import connectionOptions from './connectionOptions';
 import { AppUser } from './entity/AppUser';
