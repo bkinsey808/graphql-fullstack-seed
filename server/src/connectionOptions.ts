@@ -1,4 +1,4 @@
-import { ConnectionOptions } from 'typeorm';
+import { ConnectionOptions } from './lib/typeorm';
 import { AppUser } from './entity/AppUser';
 
 

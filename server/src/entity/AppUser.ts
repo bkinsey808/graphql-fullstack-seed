@@ -1,9 +1,10 @@
 import {
   Entity,
   PrimaryColumn,
-  Column
+  Column,
+  OneToMany,
+  JoinTable
 } from 'typeorm';
-
 import {
   EntityApi,
   ColumnApi,
@@ -12,7 +13,9 @@ import {
   getCreateQuery,
   getDeleteQuery,
   getUpdateQuery
-} from 'typeorm-graphql-api';
+} from '../typeorm-graphql-api';
+
+import { UserRole } from './UserRole';
 
 
 @EntityApi({
@@ -40,24 +43,28 @@ export class AppUser {
   id: number;
 
   @ColumnApi({
-   apiName: 'firstName',
-   apiType: 'String',
-   apiDescription: 'the first name',
-   updatable: true,
-   requiredForCreate: true
+    apiName: 'firstName',
+    apiType: 'String',
+    apiDescription: 'the first name',
+    updatable: true,
+    requiredForCreate: true
   })
   @Column('string', { nullable: true })
   firstName: string;
 
   @ColumnApi({
-   apiName: 'lastName',
-   apiType: 'String',
-   apiDescription: 'the last name',
-   updatable: true,
-   requiredForCreate: true
+    apiName: 'lastName',
+    apiType: 'String',
+    apiDescription: 'the last name',
+    updatable: true,
+    requiredForCreate: true
   })
   @Column('string', { nullable: true })
   lastName: string;
+
+  @OneToMany(type => UserRole, userRole => userRole.user)
+  @JoinTable()
+  userRoles: Promise<UserRole[]>;
 
   constructor(properties = {}) {
     Object.assign(this, properties);

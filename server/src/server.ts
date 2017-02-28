@@ -5,16 +5,17 @@ import {
   graphqlExpress,
   graphiqlExpress
 } from 'graphql-server-express';
-import { createConnection } from 'typeorm';
-import { getApiSchema } from 'typeorm-graphql-api';
+import { createConnection } from './lib/typeorm';
+import { getApiSchema } from './typeorm-graphql-api';
 
 import connectionOptions from './connectionOptions';
 import { AppUser } from './entity/AppUser';
+import { UserRole } from './entity/UserRole';
 
 
 const entityArray = [
+  UserRole,
   AppUser
-  // moar entities go here
 ];
 
 const context = {
@@ -25,8 +26,11 @@ createConnection(connectionOptions)
   .then(connection => context.connection = connection)
   .catch(error => console.log('TypeOrm error', error));
 
+const schema = getApiSchema(entityArray);
+console.log(schema);
+
 const appGraphqlExpress = graphqlExpress({
-  schema: getApiSchema(entityArray),
+  schema: schema,
   context: context
 });
 
