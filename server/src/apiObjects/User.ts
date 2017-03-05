@@ -5,11 +5,11 @@ import {
   getCreateQuery,
   getUpdateQuery,
   getDeleteQuery
-// } from '../../../../graphql-api-builder/dist/lib';
-// } from '../graphql-api-builder';
 } from 'graphql-api-builder';
 
-import { getResolver } from '../getResolver';
+import { loginQuery } from '../queries';
+import { getResolver } from '../resolvers';
+
 
 export const User: ObjectApi = {
   apiObject: 'User',
@@ -22,12 +22,13 @@ export const User: ObjectApi = {
   mutationApis: [
     getCreateQuery,
     getDeleteQuery,
-    getUpdateQuery
+    getUpdateQuery,
+    loginQuery
   ],
   fields: [{
     apiField: 'id',
     primary: true,
-    apiType: 'Int',
+    apiType: 'String',
     description: 'unique identifier',
     allowedForView: true
   }, {
@@ -37,6 +38,20 @@ export const User: ObjectApi = {
     requiredForCreate: true,
     allowedForUpdate: true,
     allowedForView: true
+  }, {
+    apiField: 'email',
+    apiType: 'String',
+    description: 'email address',
+    requiredForCreate: true,
+    allowedForUpdate: true,
+    allowedForView: true
+  }, {
+    apiField: 'password',
+    apiType: 'String',
+    description: 'secret password',
+    requiredForCreate: true,
+    allowedForUpdate: true,
+    allowedForView: false
   }],
   getResolver
 };

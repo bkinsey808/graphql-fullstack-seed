@@ -1,19 +1,16 @@
+import { createUserResolver } from './createUser';
 import * as pgp from 'pg-promise';
-
 import {
   ObjectApi,
   QueryApi,
   QueryApiResult,
   FieldApi,
   getViewableFields
-// } from '../../../graphql-api-builder/dist/lib';
 } from 'graphql-api-builder';
 
-export const isPgp = (object: any): object is pgp.IMain => true;
+import { isPgp } from './utils';
 
-const resolvers = {};
-
-resolvers['index'] = (objectApi) =>
+export const indexResolver = (objectApi: ObjectApi) =>
   async (root, args, context) => {
     if (!isPgp(context.db)) {
       throw new Error('unsupported db type');
@@ -23,7 +20,7 @@ resolvers['index'] = (objectApi) =>
     return await context.db.any(sql);
   };
 
-resolvers['detail'] = (objectApi) =>
+export const detailResolver = (objectApi: ObjectApi) =>
   async (root, args, context) => {
     if (!isPgp(context.db)) {
       throw new Error('unsupported db type');
@@ -35,7 +32,7 @@ resolvers['detail'] = (objectApi) =>
     });
   };
 
-resolvers['update'] = (objectApi) =>
+export const updateResolver = (objectApi: ObjectApi) =>
   async (root, args, context) => {
     if (!isPgp(context.db)) {
       throw new Error('unsupported db type');
@@ -54,7 +51,7 @@ resolvers['update'] = (objectApi) =>
     return await context.db.query(query);
   };
 
-resolvers['delete'] = (objectApi) =>
+export const deleteResolver = (objectApi: ObjectApi) =>
   async (root, args, context) => {
     if (!isPgp(context.db)) {
       throw new Error('unsupported db type');
@@ -63,7 +60,7 @@ resolvers['delete'] = (objectApi) =>
     return await context.db.query(query);
   };
 
-resolvers['create'] = (objectApi) =>
+export const createResolver = (objectApi: ObjectApi) =>
   async (root, args, context) => {
     if (!isPgp(context.db)) {
       throw new Error('unsupported db type');
@@ -82,7 +79,3 @@ resolvers['create'] = (objectApi) =>
     const result = await context.db.query(query);
     return true;
   };
-
-export const getResolver = (resolverType, objectApi) =>
-  resolvers[resolverType](objectApi);
-

@@ -10,7 +10,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "allowJs": true,
-    "lib": ["es2015", "dom", "es2015.reflect"]
+    "lib": ["es2016", "dom", "es2015.reflect"]
   },
   "exclude": [
     "node_modules",
