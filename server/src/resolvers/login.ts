@@ -22,15 +22,5 @@ export const loginResolver = (objectApi: ObjectApi) =>
       args.username,
       args.password
     ]);
-    console.log(result);
     return result;
   };
-
-
-/*
-
-mutation {
-  createUser(username:"myusername", password:"my password", email: "Bkinsey3@gmail.com")
-}
-
-*/
