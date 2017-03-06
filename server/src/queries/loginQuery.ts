@@ -23,7 +23,7 @@ export const loginQuery: QueryApi =
   (objectApi: ObjectApi): QueryApiResult => {
     const resolverName = 'login';
     const loginFields = getLoginFields(objectApi);
-    const typeDef = `${resolverName}(\n${loginFields}\n): User`;
+    const typeDef = `${resolverName}(\n${loginFields}\n): String`;
     return {
       resolverName,
       typeDef,
