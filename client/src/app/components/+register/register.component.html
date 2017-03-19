@@ -1,3 +1,37 @@
-<p>
-  register works!
-</p>
+<form
+  [formGroup]="registerForm"
+  (submit)="registerUser()"
+>
+  <label for="username">Username</label>
+  <input
+    formControlName="name"
+    id="name"
+  >
+  <control-messages
+    [control]="registerForm.controls.username"
+  ></control-messages>
+
+  <label for="email">Email Address</label>
+  <input
+    formControlName="email"
+    id="email"
+  >
+  <control-messages
+    [control]="registerForm.controls.email"
+  ></control-messages>
+
+  <label for="password">Passowrd</label>
+  <input
+    formControlName="password"
+    id="password"
+    type="password"
+  >
+  <control-messages
+    [control]="registerForm.controls.password"
+  ></control-messages>
+
+  <button
+    type="submit"
+    [disabled]="!registerForm.valid"
+  >Submit</button>
+</form>

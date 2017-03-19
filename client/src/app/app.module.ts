@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ApolloModule } from 'apollo-angular';
 
@@ -13,6 +16,8 @@ import { LogoutComponent } from './components/+logout/logout.component';
 import { DashboardComponent } from './components/+dashboard/dashboard.component';
 import { RegisterComponent } from './components/+register/register.component';
 import { UsersComponent } from './components/users/users.component';
+import { ValidationService } from './services/validation.service';
+import { ControlMessagesComponent } from './components/control-messages/control-messages.component';
 
 
 @NgModule({
@@ -23,16 +28,18 @@ import { UsersComponent } from './components/users/users.component';
     LoginComponent,
     LogoutComponent,
     DashboardComponent,
-    RegisterComponent
+    RegisterComponent,
+    ControlMessagesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
     ApolloModule.withClient(getClient),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ ValidationService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
