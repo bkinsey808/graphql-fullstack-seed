@@ -2,7 +2,7 @@
 
 ## Not done yet!
 
-This project does not currently do anything offiline yet.
+This project does not currently do anything offline yet.
 Still, this project does enough interesting stuff (persisted queries, jwt authentication, etc) that it may be worth taking a look at.
 
 ## Purpose for this project
