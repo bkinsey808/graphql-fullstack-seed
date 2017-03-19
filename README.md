@@ -11,8 +11,7 @@ This is super experimental. GraphQL brings many advantages to the client-server 
 Unfortunately, it seems like GraphQL ecosystem does not have a good solution for offline-first at the moment.
 The goal of this project is to build a solid example of a GraphQL offline-first application using angular/ngrx and server service worker
 running Apollo GraphQL server. 
-Entire project is architected in TypeScript, and long term goal would be to leverage TypeORM to help build GraphQL schema, resolvers, 
-and ngrx actions and models. Not really sure how possible all of this is. Your feedback is most welcome.
+Entire project is architected in TypeScript. Not really sure how possible all of this is. Your feedback is most welcome.
 
 ## Getting started
 This project uses postgres as the db. Set up the db username and password in server/connectionOptions.js . TypeORM will create the db schema for you.
@@ -43,7 +42,3 @@ If service worker, mutations will be executed against the service worker pouchdb
 which will get sync'd with the server pouchdb which will get sync'd with the Postgres db.
 
 Subscriptions will also be handled since all the db's involved support pubsub.
-
-## Known issues
-Angular CLI does not currently support TypeScript 2.1 which makes it incompatible with TypeORM. 
-Therefore I had to split client and server into separate projects. But maybe that's better to keep the client and server projects more decoupled.

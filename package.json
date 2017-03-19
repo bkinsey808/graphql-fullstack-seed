@@ -21,7 +21,6 @@
     "apollo",
     "offline-first",
     "graphql",
-    "typeorm",
     "service-worker",
     "postgres",
     "postgresql",
