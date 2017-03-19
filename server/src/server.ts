@@ -14,6 +14,10 @@ import { getExecutableSchema } from 'graphql-api-builder';
 
 import { dbObjects } from './db';
 import { objectApis } from './apiObjects';
+
+
+// What's the best way to import a json file without require?
+// Can anybody enlighten me?
 const queryMap = require('../../extracted_queries.json');
 
 const context = { ...dbObjects};
@@ -29,12 +33,12 @@ const appGraphiqlExpress = graphiqlExpress({
   endpointURL: '/graphql',
 });
 
-const whitelist = [
+const corsWhitelist = [
   'http://localhost:4200',
 ];
 const corsOptions = {
   origin: (origin, callback) => {
-    const originIsWhitelisted = whitelist.includes(origin);
+    const originIsWhitelisted = corsWhitelist.includes(origin);
     callback(null, originIsWhitelisted);
   },
   credentials: true
@@ -42,7 +46,7 @@ const corsOptions = {
 
 const PORT = 3000;
 
-function persistedQueryMiddleware (req, resp, next) {
+const persistedQueryMiddleware = (req, resp, next) => {
   const invertedMap = invert(queryMap);
   // todo remove && req.body.id on production for query whitelisting
   if (req.body && req.body.id) {

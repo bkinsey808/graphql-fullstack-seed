@@ -24,5 +24,6 @@ export const createUserResolver = (objectApi: ObjectApi) =>
       args.email,
       args.password
     ]);
+    // todo: at least return the id of the new user
     return true;
   };
