@@ -6,6 +6,8 @@ import {
 } from 'apollo-client';
 import { PersistedQueryNetworkInterface } from 'persistgraphql';
 
+
+// todo: figure out how to refractor this without require
 const queryMap = require('../../../extracted_queries.json');
 
 const networkInterface = new PersistedQueryNetworkInterface({
@@ -21,4 +23,3 @@ const client = new ApolloClient({ networkInterface });
 export function getClient(): ApolloClient {
   return client;
 }
-
