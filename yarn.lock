@@ -14,6 +14,16 @@ ansi-styles@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
 
+"apollo-angular@git://github.com/apollographql/apollo-angular.git":
+  version "0.12.0"
+  resolved "git://github.com/apollographql/apollo-angular.git#355f6655ffc5d19bd16165f1b33fc2a051218327"
+  dependencies:
+    apollo-client-rxjs "~0.5.2"
+
+apollo-client-rxjs@~0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/apollo-client-rxjs/-/apollo-client-rxjs-0.5.2.tgz#396604b5cd6e9ce0ba4e91ca2af59df35fe92856"
+
 arr-diff@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/arr-diff/-/arr-diff-2.0.0.tgz#8f3b827f955a8bd669697e4a4256ac3ceae356cf"

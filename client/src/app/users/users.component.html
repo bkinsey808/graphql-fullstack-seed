@@ -1,1 +1,7 @@
 users!
+
+<ul>
+  <li *ngFor="let user of users | async">
+    {{user.id}} {{user.username}}
+  </li>
+</ul>
