@@ -5,14 +5,14 @@ import { HttpModule } from '@angular/http';
 import { ApolloModule } from 'apollo-angular';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { UsersComponent } from './users/users.component';
+import { AppComponent } from './components/app.component';
 import { getClient } from './client';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { LogoutComponent } from './logout/logout.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './components/+home/home.component';
+import { LoginComponent } from './components/+login/login.component';
+import { LogoutComponent } from './components/+logout/logout.component';
+import { DashboardComponent } from './components/+dashboard/dashboard.component';
+import { RegisterComponent } from './components/+register/register.component';
+import { UsersComponent } from './components/users/users.component';
 
 
 @NgModule({

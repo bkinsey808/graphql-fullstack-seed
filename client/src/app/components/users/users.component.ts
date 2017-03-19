@@ -6,14 +6,15 @@ import { Apollo, ApolloQueryObservable } from 'apollo-angular';
 import { ApolloQueryResult } from 'apollo-client';
 import { Subject } from 'rxjs/Subject';
 import { DocumentNode } from 'graphql';
-
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-const UsersQueryNode: DocumentNode = require('graphql-tag/loader!../../graphql/Users.graphql');
-import { UsersQuery } from '../../graphql/schema';
+import { UsersQuery } from '../../../graphql/schema';
 
+
+// todo figure out how to refactor this to not use require
+const UsersQueryNode: DocumentNode = require('graphql-tag/loader!../../../graphql/Users.graphql');
 
 @Component({
   selector: 'app-users',
