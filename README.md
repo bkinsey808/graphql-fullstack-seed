@@ -14,7 +14,7 @@ running Apollo GraphQL server.
 Entire project is architected in TypeScript. Not really sure how possible all of this is. Your feedback is most welcome.
 
 ## Getting started
-This project uses postgres as the db. Set up the db username and password in server/connectionOptions.js . TypeORM will create the db schema for you.
+This project uses postgres as the db. Set up the db username and password in server/db.js .
 
 ## Client
 Angular CLI. Eventually with ngrx, Apollo Client. Goal is to keep GraphQL queries co-located with container components yet keep state sanely managed by ngrx.
@@ -24,8 +24,7 @@ It is an open question if ngrx store should be somehow combined with Apollo Clie
 Apollo Graphql server with pouchdb
 
 ## Server
-Apollo Graphql Server and TypeORM with Postgres backend db. As currently envisioned, Couchdb instances will be created for each client. 
-Or maybe there is a better solution I haven't thought of yet?
+Apollo Graphql Server with Postgres backend db. As currently envisioned, Couchdb instances will be created for each client. Or maybe there is a better solution I haven't thought of yet?
 
 ## Goals
 The architecture I am envisioning works as follows:
