@@ -12,7 +12,8 @@
     "client-build": "cd client && ng build --prod --aot",
     "dev": "npm-run-all --parallel server-dev client-dev",
     "build": "npm-run-all --parallel client-build server-build",
-    "prod": "npm run server-prod"
+    "prod": "npm run server-prod",
+    "persistgraphql": "persistgraphql client/src/graphql/ --add_typename"
   },
   "keywords": [
     "angular",
@@ -33,7 +34,8 @@
   "devDependencies": {
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.0.0",
-    "npm-run-all": "^4.0.2"
+    "npm-run-all": "^4.0.2",
+    "persistgraphql": "^0.3.1"
   },
   "config": {
     "commitizen": {

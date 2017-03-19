@@ -1,5 +1,12 @@
 # Experimental Offline-first GraphQL Angular Application
 
+## Not done yet!
+
+This project does not currently do anything offiline yet.
+Still, this project does enough interesting stuff (persisted queries, jwt authentication, etc) that it may be worth taking a look at.
+
+## Purpose for this project
+
 This is super experimental. GraphQL brings many advantages to the client-server API and the architecture of client-server applications.
 Unfortunately, it seems like GraphQL ecosystem does not have a good solution for offline-first at the moment.
 The goal of this project is to build a solid example of a GraphQL offline-first application using angular/ngrx and server service worker
