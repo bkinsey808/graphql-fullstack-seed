@@ -2,10 +2,25 @@
   [formGroup]="registerForm"
   (submit)="registerUser()"
 >
-  <label for="username">Username</label>
+
+  <app-field
+    label="Username"
+    name="username"
+    formControlName="username"
+    [formControl]="username"
+  ></app-field>
+
+  <!--<app-field
+    label="Password"
+    name="password"
+    type="password"
+    [appFieldFormControl]="password"
+  ></app-field>-->
+
+  <!--<label for="username">Username</label>
   <input
-    formControlName="name"
-    id="name"
+    formControlName="username"
+    id="username"
   >
   <control-messages
     [control]="registerForm.controls.username"
@@ -28,7 +43,7 @@
   >
   <control-messages
     [control]="registerForm.controls.password"
-  ></control-messages>
+  ></control-messages>-->
 
   <button
     type="submit"

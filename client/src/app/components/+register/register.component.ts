@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   Validators,
-  FormGroup
+  FormGroup,
+  FormControl
 } from '@angular/forms';
 
 import { ValidationService } from 'app/services/validation.service';
@@ -14,13 +15,21 @@ import { ValidationService } from 'app/services/validation.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup;
+
+  public registerForm: FormGroup;
+  public username: FormControl;
+  public email: FormControl;
+  public password: FormControl;
 
   constructor(private formBuilder: FormBuilder) {
-    this.registerForm = this.formBuilder.group({
-      'username': ['', [Validators.required, Validators.minLength(3)]],
-      'email': ['', [Validators.required, ValidationService.passwordValidator]],
-      'password': ['', [Validators.required, ValidationService.passwordValidator]],
+    this.username = new FormControl('');
+    this.email = new FormControl('');
+    this.password = new FormControl('');
+
+    this.registerForm = new FormGroup({
+      username: this.username,
+      email: this.email,
+      password: this.password,
     });
 
   }
@@ -29,6 +38,7 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser() {
+    console.log('register user');
     if (this.registerForm.dirty && this.registerForm.valid) {
       alert(`Name: ${this.registerForm.value.username} Email: ${this.registerForm.value.email}`);
     }
