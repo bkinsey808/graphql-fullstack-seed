@@ -17,24 +17,23 @@ import { Subject } from 'rxjs/Subject';
 
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
-import { ControlMessagesComponent } from './control-messages/control-messages.component';
 
 
 @Component({
-  selector: 'app-field',
-  templateUrl: './field.component.html',
-  styleUrls: ['./field.component.css'],
+  selector: 'app-control',
+  templateUrl: './control.component.html',
+  styleUrls: ['./control.component.css'],
   entryComponents: [
     InputComponent,
     TextareaComponent
   ],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => FieldComponent),
+    useExisting: forwardRef(() => ControlComponent),
     multi: true
   }]
 })
-export class FieldComponent implements OnInit, ControlValueAccessor {
+export class ControlComponent implements OnInit, ControlValueAccessor {
 
   onChange: Function;
   onTouch: Function;
@@ -43,12 +42,11 @@ export class FieldComponent implements OnInit, ControlValueAccessor {
   @Input('value') _value: any;
   @Input() formControl: FormControl;
 
-  // supported field types
+  // supported control types
   @Input()
   type: 'text' | 'textarea' | 'username' | 'password' | 'email';
 
-  @ViewChild(ControlMessagesComponent)
-  controlMessages: ControlMessagesComponent;
+  @ViewChild('input', {read: ViewContainerRef}) input;
 
   constructor(
     private viewContainerRef: ViewContainerRef,
@@ -60,17 +58,17 @@ export class FieldComponent implements OnInit, ControlValueAccessor {
       this.type === 'textarea' ? TextareaComponent : InputComponent;
 
     const compFactory = this.cfr.resolveComponentFactory(componentType);
-    const ref = this.viewContainerRef.createComponent(compFactory);
+    const inputRef = this.input.createComponent(compFactory);
     if (this.type === 'password') {
-      (<InputComponent>ref.instance).type = 'password';
+      (<InputComponent>inputRef.instance).type = 'password';
     }
-    (<Subject<string>>ref.instance.change).subscribe((value: string) => {
+    (<Subject<string>>inputRef.instance.change).subscribe((value: string) => {
       this.onChange(value);
     });
-    (<Subject<null>>ref.instance.blur).subscribe(() => {
+    (<Subject<null>>inputRef.instance.blur).subscribe(() => {
       this.onTouch();
     });
-    ref.changeDetectorRef.detectChanges();
+    inputRef.changeDetectorRef.detectChanges();
   }
 
   writeValue(value: any) {

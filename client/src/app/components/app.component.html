@@ -1,7 +1,11 @@
-<h1>
-  {{title}}
-</h1>
+<h1>Angular Offline-First GraphQL</h1>
+<p>
+  A fullstack app that demonstrates my opinion of
+  cutting edge best practices (as I have time to implement them).
+</p>
+
 <nav>
+  <h2>Menu</h2>
   <a routerLink="/">Home</a>
   <a routerLink="/login">Login</a>
   <a routerLink="/logout">Logout</a>
@@ -10,4 +14,6 @@
   <a routerLink="/users">Users</a>
 </nav>
 
-<router-outlet></router-outlet>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

@@ -17,10 +17,10 @@ import { DashboardComponent } from './components/+dashboard/dashboard.component'
 import { RegisterComponent } from './components/+register/register.component';
 import { UsersComponent } from './components/users/users.component';
 import { ValidationService } from './services/validation.service';
-import { ControlMessagesComponent } from './components/field/control-messages/control-messages.component';
-import { FieldComponent } from './components/field/field.component';
-import { InputComponent } from './components/field/input/input.component';
-import { TextareaComponent } from './components/field/textarea/textarea.component';
+import { ControlMessagesComponent } from './components/control/control-messages/control-messages.component';
+import { ControlComponent } from './components/control/control.component';
+import { InputComponent } from './components/control/input/input.component';
+import { TextareaComponent } from './components/control/textarea/textarea.component';
 
 
 @NgModule({
@@ -32,8 +32,8 @@ import { TextareaComponent } from './components/field/textarea/textarea.componen
     LogoutComponent,
     DashboardComponent,
     RegisterComponent,
+    ControlComponent,
     ControlMessagesComponent,
-    FieldComponent,
     InputComponent,
     TextareaComponent
   ],

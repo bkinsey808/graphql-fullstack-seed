@@ -1,47 +1,28 @@
+<h2>Register a new User</h2>
 <form
   [formGroup]="registerForm"
   (submit)="registerUser()"
 >
-  <app-field
-    label="Username"
-    formControlName="username"
-    [formControl]="username"
-  ></app-field>
+  <div class="form-controls">
+    <app-control
+      label="Username"
+      formControlName="username"
+      [formControl]="username"
+    ></app-control>
 
-  <app-field
-    label="Password"
-    type="password"
-    formControlName="password"
-    [formControl]="password"
-  ></app-field>
+    <app-control
+      label="Email"
+      formControlName="email"
+      [formControl]="email"
+    ></app-control>
 
-  <!--<label for="username">Username</label>
-  <input
-    formControlName="username"
-    id="username"
-  >
-  <control-messages
-    [control]="registerForm.controls.username"
-  ></control-messages>
-
-  <label for="email">Email Address</label>
-  <input
-    formControlName="email"
-    id="email"
-  >
-  <control-messages
-    [control]="registerForm.controls.email"
-  ></control-messages>
-
-  <label for="password">Passowrd</label>
-  <input
-    formControlName="password"
-    id="password"
-    type="password"
-  >
-  <control-messages
-    [control]="registerForm.controls.password"
-  ></control-messages>-->
+    <app-control
+      label="Password"
+      type="password"
+      formControlName="password"
+      [formControl]="password"
+    ></app-control>
+  </div>
 
   <button
     type="submit"

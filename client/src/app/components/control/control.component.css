@@ -1,0 +1,13 @@
+:host {
+  border: 1px solid lightgray;
+  display: block;
+  padding: 15px;
+}
+
+label {
+  display: block;
+}
+
+app-input {
+  width: 100%;
+}
