@@ -1,4 +1,7 @@
 <input
-  [id]="name"
+  #input
   [type]="type"
+  (change)="onChange(input.value)"
+  (keyup)="onChange(input.value)"
+  (blur)="onBlur()"
 >

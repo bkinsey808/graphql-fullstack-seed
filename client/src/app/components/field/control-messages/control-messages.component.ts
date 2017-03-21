@@ -14,6 +14,7 @@ export class ControlMessagesComponent {
   constructor() { }
 
   get errorMessage() {
+    // todo write this without a loop
     for (let propertyName in this.control.errors) {
       if (
         this.control.errors.hasOwnProperty(propertyName) &&

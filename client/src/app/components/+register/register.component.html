@@ -2,20 +2,18 @@
   [formGroup]="registerForm"
   (submit)="registerUser()"
 >
-
   <app-field
     label="Username"
-    name="username"
     formControlName="username"
     [formControl]="username"
   ></app-field>
 
-  <!--<app-field
+  <app-field
     label="Password"
-    name="password"
     type="password"
-    [appFieldFormControl]="password"
-  ></app-field>-->
+    formControlName="password"
+    [formControl]="password"
+  ></app-field>
 
   <!--<label for="username">Username</label>
   <input

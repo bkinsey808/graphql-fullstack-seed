@@ -1,9 +1,12 @@
 import {
   Component,
   OnInit,
-  Input
+  Input,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Subject } from 'rxjs/Subject';
 
 
 @Component({
@@ -18,9 +21,20 @@ export class InputComponent implements OnInit {
   @Input() formControl: FormControl;
   @Input() formControlName: string;
 
+  @Output() change: Subject<string> = new Subject<string>();
+  @Output() blur: Subject<null> = new Subject<null>();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  onChange(inputValue) {
+    this.change.next(inputValue);
+  }
+
+  onBlur() {
+    this.blur.next();
   }
 
 }

@@ -22,9 +22,9 @@ export class RegisterComponent implements OnInit {
   public password: FormControl;
 
   constructor(private formBuilder: FormBuilder) {
-    this.username = new FormControl('');
-    this.email = new FormControl('');
-    this.password = new FormControl('');
+    this.username = new FormControl('', Validators.required);
+    this.password = new FormControl('', ValidationService.passwordValidator);
+    this.email = new FormControl('', ValidationService.emailValidator);
 
     this.registerForm = new FormGroup({
       username: this.username,
@@ -38,9 +38,9 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser() {
-    console.log('register user');
+    console.log('register user', this.username);
     if (this.registerForm.dirty && this.registerForm.valid) {
-      alert(`Name: ${this.registerForm.value.username} Email: ${this.registerForm.value.email}`);
+      alert(`Username: ${this.registerForm.value.username} Email: ${this.registerForm.value.email}`);
     }
   }
 
