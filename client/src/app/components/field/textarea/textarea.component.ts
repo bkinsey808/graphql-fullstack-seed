@@ -2,8 +2,7 @@ import {
   Component,
   OnInit,
   Input,
-  Output,
-  EventEmitter
+  Output
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
@@ -14,17 +13,12 @@ import { Subject } from 'rxjs/Subject';
   templateUrl: './textarea.component.html',
   styleUrls: ['./textarea.component.css']
 })
-export class TextareaComponent implements OnInit {
+export class TextareaComponent {
 
   @Input() name: string;
-  @Input() formControl: FormControl;
 
   @Output() change: Subject<string> = new Subject<string>();
   @Output() blur: Subject<null> = new Subject<null>();
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  constructor() {}
 }

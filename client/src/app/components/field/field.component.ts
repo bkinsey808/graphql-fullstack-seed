@@ -64,11 +64,10 @@ export class FieldComponent implements OnInit, ControlValueAccessor {
     if (this.type === 'password') {
       (<InputComponent>ref.instance).type = 'password';
     }
-    ref.instance.formControl = this.formControl;
-    (<Subject<string>>ref.instance.change).subscribe((value) => {
+    (<Subject<string>>ref.instance.change).subscribe((value: string) => {
       this.onChange(value);
     });
-    (<Subject<null>>ref.instance.blur).subscribe((value) => {
+    (<Subject<null>>ref.instance.blur).subscribe(() => {
       this.onTouch();
     });
     ref.changeDetectorRef.detectChanges();

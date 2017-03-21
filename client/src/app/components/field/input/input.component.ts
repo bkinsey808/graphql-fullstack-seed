@@ -2,8 +2,7 @@ import {
   Component,
   OnInit,
   Input,
-  Output,
-  EventEmitter
+  Output
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
@@ -14,20 +13,15 @@ import { Subject } from 'rxjs/Subject';
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.css']
 })
-export class InputComponent implements OnInit {
+export class InputComponent {
 
   @Input() name: string;
   @Input() type: string;
-  @Input() formControl: FormControl;
-  @Input() formControlName: string;
 
   @Output() change: Subject<string> = new Subject<string>();
   @Output() blur: Subject<null> = new Subject<null>();
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   onChange(inputValue) {
     this.change.next(inputValue);
@@ -36,5 +30,4 @@ export class InputComponent implements OnInit {
   onBlur() {
     this.blur.next();
   }
-
 }
