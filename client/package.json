@@ -1,5 +1,5 @@
 {
-  "name": "angular-offline-first-graphql-client",
+  "name": "angular-graphql-fullstack-seed-client",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

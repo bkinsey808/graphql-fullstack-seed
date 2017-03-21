@@ -1,7 +1,7 @@
 {
-  "name": "angular-offline-first-graphql",
+  "name": "angular-graphql-fullstack-seed",
   "version": "0.0.1",
-  "description": "an experiment to try to bring offline-first capability to an angular apollo graphql application.",
+  "description": "A seed project to help you get quickly started with a fullstack Angular/GraphQL app",
   "main": "index.js",
   "scripts": {
     "commit": "git-cz",

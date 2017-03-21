@@ -1,4 +1,4 @@
-# Experimental Offline-first GraphQL Angular Application
+# Angular GraphQL Fullstack Seed
 
 ## Not done yet!
 
