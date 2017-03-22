@@ -6,7 +6,7 @@ import {
   FormControl
 } from '@angular/forms';
 
-import { ValidationService } from 'app/services/validation.service';
+import { ValidationService } from 'app/control-module/services/validation.service';
 
 
 @Component({

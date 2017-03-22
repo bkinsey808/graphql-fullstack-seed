@@ -30,6 +30,8 @@
   ],
   "author": "Ben Kinsey",
   "license": "MIT",
+  "dependencies": {
+  },
   "devDependencies": {
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.0.0",
@@ -40,9 +42,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "dependencies": {
-    "capitalize": "^1.0.0",
-    "pluralize": "^4.0.0"
   }
 }

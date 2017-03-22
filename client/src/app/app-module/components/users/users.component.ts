@@ -10,11 +10,11 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-import { UsersQuery } from '../../../graphql/schema';
+import { UsersQuery } from '../../../../graphql/schema';
 
 
 // todo figure out how to refactor this to not use require
-const UsersQueryNode: DocumentNode = require('graphql-tag/loader!../../../graphql/Users.graphql');
+const UsersQueryNode: DocumentNode = require('graphql-tag/loader!../../../../graphql/Users.graphql');
 
 @Component({
   selector: 'app-users',
