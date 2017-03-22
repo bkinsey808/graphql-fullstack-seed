@@ -9,12 +9,10 @@ import {
 
 const getLoginFields = (objectApi: ObjectApi) =>
   objectApi.fields
-    .filter(
-    (fieldApi: FieldApi) =>
+    .filter((fieldApi: FieldApi) =>
       ['username', 'password'].includes(fieldApi.apiField)
     )
-    .map(
-    (fieldApi: FieldApi) =>
+    .map((fieldApi: FieldApi) =>
       getFieldDef(fieldApi, fieldApi.apiField === 'password')
     )
     .join();

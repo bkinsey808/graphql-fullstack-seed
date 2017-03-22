@@ -1,4 +1,4 @@
-import { createUserResolver } from './createUser';
+import { registerResolver } from './register';
 import { loginResolver } from './login';
 import {
   indexResolver,
@@ -8,18 +8,16 @@ import {
   createResolver
 } from './common';
 
+
 const resolvers = {
   index: indexResolver,
   detail: detailResolver,
   update: updateResolver,
   delete: deleteResolver,
-  create: createResolver,
-  login: loginResolver
+  login: loginResolver,
+  register: registerResolver
 };
 
-export const getResolver = (resolverType, objectApi) => {
-  if (resolverType === 'create' && objectApi.apiObject === 'User') {
-    return createUserResolver(objectApi);
-  }
-  return resolvers[resolverType](objectApi);
-};
+export const getResolver = (resolverType, objectApi) =>
+  resolvers[resolverType](objectApi);
+

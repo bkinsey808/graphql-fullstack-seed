@@ -13,17 +13,18 @@ import {
 } from './utils';
 
 
-export const createUserResolver = (objectApi: ObjectApi) =>
+export const registerResolver = (objectApi: ObjectApi) =>
   async (root, args, context) => {
     if (!isPgp(context.db)) {
       throw new Error('unsupported db type');
     }
 
-    const result = await context.db.query(sql('createUser.sql'), [
+    const result = await context.db.query(sql('register.sql'), [
       args.username,
       args.email,
       args.password
     ]);
+    console.log('register result: ', result);
     // todo: at least return the id of the new user
-    return true;
+    return 'new jwt will go here';
   };

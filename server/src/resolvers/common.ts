@@ -1,4 +1,3 @@
-import { createUserResolver } from './createUser';
 import * as pgp from 'pg-promise';
 import {
   ObjectApi,

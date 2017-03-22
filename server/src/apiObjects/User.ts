@@ -2,12 +2,12 @@ import {
   ObjectApi,
   getIndexQuery,
   getDetailQuery,
-  getCreateQuery,
   getUpdateQuery,
   getDeleteQuery
 } from 'graphql-api-builder';
 
 import { loginQuery } from '../queries';
+import { registerQuery } from '../queries';
 import { getResolver } from '../resolvers';
 
 
@@ -20,9 +20,9 @@ export const User: ObjectApi = {
     getDetailQuery
   ],
   mutationApis: [
-    getCreateQuery,
     getDeleteQuery,
     getUpdateQuery,
+    registerQuery,
     loginQuery
   ],
   fields: [{

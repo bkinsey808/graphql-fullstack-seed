@@ -23,9 +23,8 @@ const UsersQueryNode: DocumentNode = require('graphql-tag/loader!../../../../gra
 })
 export class UsersComponent implements OnInit {
   public users: ApolloQueryObservable<UsersQuery>;
-  private apollo: Apollo;
 
-  constructor(apollo: Apollo) {
+  constructor(private apollo: Apollo) {
     this.apollo = apollo;
   }
 
