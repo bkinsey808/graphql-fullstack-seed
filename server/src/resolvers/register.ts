@@ -25,6 +25,8 @@ export const registerResolver = (objectApi: ObjectApi) =>
       args.password
     ]);
     console.log('register result: ', result);
+    const id = result[0].id;
+    console.log(id);
     // todo: at least return the id of the new user
     return 'new jwt will go here';
   };
