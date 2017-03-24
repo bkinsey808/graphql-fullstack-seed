@@ -1,10 +1,10 @@
-import { AngularOfflineFirstGraphqlClientPage } from './app.po';
+import { AngularGraphqlFullstackSeedClientPage } from './app.po';
 
-describe('angular-offline-first-graphql-client App', () => {
-  let page: AngularOfflineFirstGraphqlClientPage;
+describe('angular-graphql-fullstack-seed-client App', () => {
+  let page: AngularGraphqlFullstackSeedClientPage;
 
   beforeEach(() => {
-    page = new AngularOfflineFirstGraphqlClientPage();
+    page = new AngularGraphqlFullstackSeedClientPage();
   });
 
   it('should display message saying app works', () => {
