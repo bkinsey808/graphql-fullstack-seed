@@ -1,4 +1,4 @@
-import {
+  import {
   Component,
   OnInit,
   Input,
@@ -6,7 +6,8 @@ import {
   ViewContainerRef,
   Type,
   forwardRef,
-  ViewChild
+  ViewChild,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import {
   FormControl,
@@ -31,7 +32,8 @@ import { TextareaComponent } from './textarea/textarea.component';
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => ControlComponent),
     multi: true
-  }]
+  }],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ControlComponent implements OnInit, ControlValueAccessor {
 
@@ -46,7 +48,7 @@ export class ControlComponent implements OnInit, ControlValueAccessor {
   @Input()
   type: 'text' | 'textarea' | 'username' | 'password' | 'email';
 
-  @ViewChild('input', {read: ViewContainerRef}) input;
+  @ViewChild('input', { read: ViewContainerRef }) input;
 
   constructor(
     private viewContainerRef: ViewContainerRef,

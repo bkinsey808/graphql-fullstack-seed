@@ -2,7 +2,8 @@ import {
   Component,
   OnInit,
   Input,
-  Output
+  Output,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
@@ -11,7 +12,8 @@ import { Subject } from 'rxjs/Subject';
 @Component({
   selector: 'app-textarea',
   templateUrl: './textarea.component.html',
-  styleUrls: ['./textarea.component.css']
+  styleUrls: ['./textarea.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TextareaComponent {
 
@@ -20,5 +22,5 @@ export class TextareaComponent {
   @Output() change: Subject<string> = new Subject<string>();
   @Output() blur: Subject<null> = new Subject<null>();
 
-  constructor() {}
+  constructor() { }
 }

@@ -1,6 +1,10 @@
 declare var require: any;
 
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit
+} from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -26,7 +30,8 @@ const RegisterMutationNode: DocumentNode =
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterComponent implements OnInit {
 
