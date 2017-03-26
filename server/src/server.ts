@@ -15,7 +15,6 @@ import { getExecutableSchema } from 'graphql-api-builder';
 import { dbObjects } from './db';
 import { objectApis } from './apiObjects';
 
-
 // What's the best way to import a json file without require?
 // Can anybody enlighten me?
 const queryMap = require('../../extracted_queries.json');

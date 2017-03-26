@@ -23,4 +23,13 @@ export class TextareaComponent {
   @Output() blur: Subject<null> = new Subject<null>();
 
   constructor() { }
+
+  onChange(inputValue) {
+    this.change.next(inputValue);
+  }
+
+  onBlur() {
+    this.blur.next();
+  }
+
 }

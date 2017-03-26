@@ -4,18 +4,25 @@ import {
   QueryApi,
   QueryApiResult,
   FieldApi,
-  getViewableFields
+  getViewableFields,
+  getFieldsFilteredByProperties,
 } from 'graphql-api-builder';
 
 import { isPgp } from './utils';
+
 
 export const indexResolver = (objectApi: ObjectApi) =>
   async (root, args, context) => {
     if (!isPgp(context.db)) {
       throw new Error('unsupported db type');
     }
-    const viewableFields = getViewableFields(objectApi, context).join(', ');
-    const sql = `SELECT ${viewableFields} FROM ${objectApi.dbObject}`;
+    const properties = {
+      inDb: true,
+      allowedForView: true,
+    };
+    const selectFields =
+      getFieldsFilteredByProperties(objectApi, properties).join(', ');
+    const sql = `SELECT ${selectFields} FROM ${objectApi.dbObject}`;
     return await context.db.any(sql);
   };
 

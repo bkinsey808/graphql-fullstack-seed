@@ -58,31 +58,29 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser() {
-    console.log('register user', this.username);
     if (this.registerForm.dirty && this.registerForm.valid) {
-      alert(`Username: ${this.registerForm.value.username} Email: ${this.registerForm.value.email}`);
+//      alert(`Username: ${this.registerForm.value.username} Email: ${this.registerForm.value.email}`);
     }
 
-
-   // Call the mutation called addUser
-    this.apollo.mutate<RegisterMutation>({
+    const registerObject = {
       mutation: RegisterMutationNode,
       variables: {
         username: this.registerForm.value.username,
         email: this.registerForm.value.email,
         password: this.registerForm.value.password,
       },
-    })
+    };
+
+    this.apollo.mutate<RegisterMutation>(registerObject)
       .toPromise()
       .then(({ data }) => {
         console.log('got a new user', data);
+        const jwtToken = data.register.id;
 
       })
       .catch((errors: any) => {
         console.log('there was an error sending the query', errors);
       });
-
-
   }
 
 }

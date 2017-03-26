@@ -12,6 +12,8 @@ import {
   sql
 } from './utils';
 
+import { createToken } from '../jwt';
+
 
 export const registerResolver = (objectApi: ObjectApi) =>
   async (root, args, context) => {
@@ -19,14 +21,13 @@ export const registerResolver = (objectApi: ObjectApi) =>
       throw new Error('unsupported db type');
     }
 
-    const result = await context.db.query(sql('register.sql'), [
+    const results = await context.db.query(sql('register.sql'), [
       args.username,
       args.email,
       args.password
     ]);
-    console.log('register result: ', result);
-    const id = result[0].id;
-    console.log(id);
-    // todo: at least return the id of the new user
-    return 'new jwt will go here';
+    return {
+      ...results[0],
+      token: createToken({id: results[0].id}),
+    };
   };

@@ -41,8 +41,9 @@ export class ControlComponent implements OnInit, ControlValueAccessor {
   onTouch: Function;
 
   @Input() label: string;
-  @Input('value') _value: any;
+  @Input() value: any;
   @Input() formControl: FormControl;
+  @Input() formControlName: string;
 
   // supported control types
   @Input()
@@ -75,7 +76,7 @@ export class ControlComponent implements OnInit, ControlValueAccessor {
 
   writeValue(value: any) {
     if (value !== undefined) {
-      this._value = value;
+      this.value = value;
     }
   }
 

@@ -30,28 +30,32 @@ export const User: ObjectApi = {
     primary: true,
     apiType: 'String',
     description: 'unique identifier',
-    allowedForView: true
+    allowedForView: true,
+    inDb: true,
   }, {
     apiField: 'username',
     apiType: 'String',
     description: 'public identifier',
     requiredForCreate: true,
     allowedForUpdate: true,
-    allowedForView: true
+    allowedForView: true,
+    inDb: true,
   }, {
     apiField: 'email',
     apiType: 'String',
     description: 'email address',
     requiredForCreate: true,
     allowedForUpdate: true,
-    allowedForView: true
+    allowedForView: true,
+    inDb: true,
   }, {
     apiField: 'password',
     apiType: 'String',
     description: 'secret password',
     requiredForCreate: true,
     allowedForUpdate: true,
-    allowedForView: false
+    allowedForView: false,
+    inDb: true,
   }],
   getResolver
 };

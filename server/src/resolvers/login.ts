@@ -1,4 +1,3 @@
-import * as jwt from 'jsonwebtoken';
 import * as pgp from 'pg-promise';
 import {
   ObjectApi,
@@ -12,6 +11,7 @@ import {
   isPgp,
   sql
 } from './utils';
+import { createToken } from '../jwt';
 
 
 export const loginResolver = (objectApi: ObjectApi) =>
@@ -23,9 +23,6 @@ export const loginResolver = (objectApi: ObjectApi) =>
       args.username,
       args.password
     ]);
-    const token = jwt.sign({
-      username: result.usename,
-      id: result.id
-    }, 'json_web_token_secret', { expiresIn: 120 });
+    const token = createToken(result);
     return token;
   };

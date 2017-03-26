@@ -42,10 +42,9 @@ export class UsersComponent implements OnInit {
       query: UsersQueryNode,
     })
       // Return only users, not the whole ApolloQueryResult
-      .map(result => {
-        console.log(result.data.users);
-        return result.data.users;
-      }) as any;
+      .map(result =>
+        result.data.users
+      ) as any;
   }
 
 }

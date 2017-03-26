@@ -52,9 +52,9 @@
   dependencies:
     moment ">=2.14.0"
 
-"@types/pg@^6.1.37":
-  version "6.1.37"
-  resolved "https://registry.yarnpkg.com/@types/pg/-/pg-6.1.37.tgz#3471cf8576801b3673df80c9cdb0b45a85206d5b"
+"@types/pg@^6.1.38":
+  version "6.1.38"
+  resolved "https://registry.yarnpkg.com/@types/pg/-/pg-6.1.38.tgz#74aa391f1bcc721537d9492a9b10947296ce909b"
   dependencies:
     "@types/node" "*"
     "@types/pg-types" "*"
@@ -677,18 +677,17 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
-graphql-api-builder@0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/graphql-api-builder/-/graphql-api-builder-0.0.14.tgz#82f1960fe6b30410fc3883fe5406d24252d00f92"
+graphql-api-builder@0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/graphql-api-builder/-/graphql-api-builder-0.0.18.tgz#dc2f8117ffed65bb9525504e446a84423df86e5e"
   dependencies:
     capitalize "^1.0.0"
     graphql "^0.9.1"
-    graphql-subscriptions "^0.3.0"
-    graphql-tag "^1.2.4"
+    graphql-subscriptions "^0.3.1"
     graphql-tools "^0.10.1"
     lcfirst "^1.0.0"
     pluralize "^4.0.0"
-    reflect-metadata "^0.1.9"
+    reflect-metadata "^0.1.10"
 
 graphql-server-core@^0.6.0:
   version "0.6.0"
@@ -710,15 +709,11 @@ graphql-server-module-graphiql@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/graphql-server-module-graphiql/-/graphql-server-module-graphiql-0.6.0.tgz#e37634b05f000731981e8ed13103f9a5861e5da0"
 
-graphql-subscriptions@^0.3.0, graphql-subscriptions@^0.3.1:
+graphql-subscriptions@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/graphql-subscriptions/-/graphql-subscriptions-0.3.1.tgz#0cedc2d507420cf26cf414080b079f05402f0303"
   dependencies:
     es6-promise "^3.2.1"
-
-graphql-tag@^1.2.4:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-1.3.1.tgz#16cdf13635f10bbc968c6f2c6265ffe883a906da"
 
 graphql-tag@^1.3.2:
   version "1.3.2"
@@ -1546,7 +1541,7 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-reflect-metadata@^0.1.9:
+reflect-metadata@^0.1.10:
   version "0.1.10"
   resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.10.tgz#b4f83704416acad89988c9b15635d47e03b9344a"
 

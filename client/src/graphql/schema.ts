@@ -8,7 +8,10 @@ export interface RegisterMutationVariables {
 }
 
 export interface RegisterMutation {
-  register: string | null;
+  register: {
+    id: string | null,
+    token: string | null,
+  } | null;
 }
 
 export interface UsersQuery {

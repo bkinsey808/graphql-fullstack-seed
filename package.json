@@ -13,6 +13,8 @@
     "dev": "npm-run-all --parallel server-dev client-dev",
     "build": "npm-run-all --parallel client-build server-build",
     "prod": "npm run server-prod",
+    "schema:download": "cd client && ./node_modules/.bin/apollo-codegen download-schema http://localhost:3000/graphql --output schema.json",
+    "schema:generate": "cd client && ./node_modules/.bin/apollo-codegen generate src/graphql/*.graphql --schema schema.json --target typescript --output src/graphql/schema.ts",
     "persistgraphql": "persistgraphql client/src/graphql/ --add_typename"
   },
   "keywords": [
