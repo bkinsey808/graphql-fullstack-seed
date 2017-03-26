@@ -1,7 +1,7 @@
 <h2>Register a new User</h2>
 <form
-  [formGroup]="registerForm"
-  (submit)="registerUser()"
+  [formGroup]="form"
+  (submit)="submit()"
 >
   <div class="form-controls">
     <app-control
@@ -26,6 +26,6 @@
 
   <button
     type="submit"
-    [disabled]="!registerForm.valid"
+    [disabled]="!form.valid"
   >Submit</button>
 </form>

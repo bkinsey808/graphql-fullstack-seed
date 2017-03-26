@@ -19,13 +19,14 @@ import { objectApis } from './apiObjects';
 // Can anybody enlighten me?
 const queryMap = require('../../extracted_queries.json');
 
-const context = { ...dbObjects};
+const context = { ...dbObjects };
 
 const schema: GraphQLSchema = getExecutableSchema(objectApis);
 
 const appGraphqlExpress = graphqlExpress({
   schema,
-  context
+  context,
+  debug: false, // maybe set to true if NODE_ENV === 'development'
 });
 
 const appGraphiqlExpress = graphiqlExpress({

@@ -1,9 +1,9 @@
 import { ObjectApis } from '../../../../graphql-api-builder/dist';
 import { User } from './User';
-import { RegisterResult } from './RegisterResult';
+import { TokenResult } from './TokenResult';
 
 
 export const objectApis: ObjectApis = {
   User,
-  RegisterResult
+  TokenResult
 };

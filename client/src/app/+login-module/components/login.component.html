@@ -1,3 +1,25 @@
-<p>
-  login works!
-</p>
+<h2>Login</h2>
+<form
+  [formGroup]="form"
+  (submit)="submit()"
+>
+  <div class="form-controls">
+    <app-control
+      label="Username or Email Address"
+      formControlName="usernameOrEmail"
+      [formControl]="usernameOrEmail"
+    ></app-control>
+
+    <app-control
+      label="Password"
+      type="password"
+      formControlName="password"
+      [formControl]="password"
+    ></app-control>
+  </div>
+
+  <button
+    type="submit"
+    [disabled]="!form.valid"
+  >Submit</button>
+</form>

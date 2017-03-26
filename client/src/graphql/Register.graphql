@@ -9,6 +9,7 @@ mutation register(
     password: $password
   ) {
     id
+    username
     token
   }
 }

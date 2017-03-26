@@ -12,7 +12,7 @@ export const registerQuery: QueryApi =
   (objectApi: ObjectApi): QueryApiResult => {
     const resolverName = 'register';
     const createFields = getCreateFields(objectApi);
-    const typeDef = `${resolverName}(\n${createFields}\n): RegisterResult`;
+    const typeDef = `${resolverName}(\n${createFields}\n): TokenResult`;
     return {
       resolverName,
       typeDef,

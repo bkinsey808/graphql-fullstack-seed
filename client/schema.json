@@ -258,7 +258,7 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "RegisterResult",
+                "name": "TokenResult",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -269,18 +269,22 @@
               "description": "the login query",
               "args": [
                 {
-                  "name": "username",
-                  "description": "public identifier",
+                  "name": "usernameOrEmail",
+                  "description": "",
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "String",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 },
                 {
                   "name": "password",
-                  "description": "secret password",
+                  "description": "",
                   "type": {
                     "kind": "NON_NULL",
                     "name": null,
@@ -294,8 +298,8 @@
                 }
               ],
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "OBJECT",
+                "name": "TokenResult",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -319,12 +323,24 @@
         },
         {
           "kind": "OBJECT",
-          "name": "RegisterResult",
+          "name": "TokenResult",
           "description": "result of a successful registration",
           "fields": [
             {
               "name": "id",
-              "description": "user id",
+              "description": "unique identifier",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "username",
+              "description": "the unique username",
               "args": [],
               "type": {
                 "kind": "SCALAR",

@@ -19,10 +19,20 @@ export const loginResolver = (objectApi: ObjectApi) =>
     if (!isPgp(context.db)) {
       throw new Error('unsupported db type');
     }
-    const result = await context.db.one(sql('login.sql'), [
-      args.username,
-      args.password
-    ]);
-    const token = createToken(result);
-    return token;
+    const queryVariables = [
+      args.usernameOrEmail,
+      args.password,
+    ];
+    const sqlQuery = sql('login.sql');
+    let results;
+    try {
+      results = await context.db.one(sqlQuery, queryVariables);
+    } catch (error) {
+      throw new Error('Login failed. Check your username or email and password.');
+    }
+    return {
+      ...results,
+      token: createToken({ id: results.id }),
+    };
+
   };

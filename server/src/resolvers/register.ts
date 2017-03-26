@@ -20,14 +20,29 @@ export const registerResolver = (objectApi: ObjectApi) =>
     if (!isPgp(context.db)) {
       throw new Error('unsupported db type');
     }
-
-    const results = await context.db.query(sql('register.sql'), [
+    const queryVariables = [
       args.username,
       args.email,
       args.password
-    ]);
+    ];
+    const sqlQuery = sql('register.sql');
+    let results;
+    try {
+      results = await context.db.one(sqlQuery, queryVariables);
+    } catch (exception) {
+      if (exception.message.startsWith('duplicate key value')) {
+        if (exception.constraint === 'app_user_email_key') {
+          throw new Error('Email Address already registered.');
+        } else if (exception.constraint === 'app_user_username_key'){
+          throw new Error('Username already registered.');
+        }
+      } else {
+        console.log(exception);
+        throw new Error('Unknown error while trying to register. Please try again later.');
+      }
+    }
     return {
-      ...results[0],
-      token: createToken({id: results[0].id}),
+      ...results,
+      token: createToken({id: results.id}),
     };
   };

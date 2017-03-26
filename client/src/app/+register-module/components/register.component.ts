@@ -3,20 +3,17 @@ declare var require: any;
 import {
   Component,
   ChangeDetectionStrategy,
-  OnInit
 } from '@angular/core';
 import {
   FormBuilder,
   Validators,
   FormGroup,
-  FormControl
+  FormControl,
 } from '@angular/forms';
 import { Apollo, ApolloQueryObservable } from 'apollo-angular';
 import { ApolloQueryResult } from 'apollo-client';
-import { Subject } from 'rxjs/Subject';
 import { DocumentNode } from 'graphql';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/map';
+import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/toPromise';
 
 import { ValidationService } from 'app/control-module/services/validation.service';
@@ -33,41 +30,36 @@ const RegisterMutationNode: DocumentNode =
   styleUrls: ['./register.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
-  public registerForm: FormGroup;
+  public form: FormGroup;
   public username: FormControl;
   public email: FormControl;
   public password: FormControl;
-
 
   constructor(private formBuilder: FormBuilder, private apollo: Apollo) {
     this.username = new FormControl('', Validators.required);
     this.password = new FormControl('', ValidationService.passwordValidator);
     this.email = new FormControl('', ValidationService.emailValidator);
 
-    this.registerForm = new FormGroup({
+    this.form = new FormGroup({
       username: this.username,
       email: this.email,
       password: this.password,
     });
-
   }
 
-  ngOnInit() {
-  }
-
-  registerUser() {
-    if (this.registerForm.dirty && this.registerForm.valid) {
-//      alert(`Username: ${this.registerForm.value.username} Email: ${this.registerForm.value.email}`);
+  submit() {
+    if (this.form.dirty && this.form.valid) {
+      // alert(`Username: ${this.registerForm.value.username} Email: ${this.registerForm.value.email}`);
     }
 
     const registerObject = {
       mutation: RegisterMutationNode,
       variables: {
-        username: this.registerForm.value.username,
-        email: this.registerForm.value.email,
-        password: this.registerForm.value.password,
+        username: this.form.value.username,
+        email: this.form.value.email,
+        password: this.form.value.password,
       },
     };
 
@@ -76,7 +68,6 @@ export class RegisterComponent implements OnInit {
       .then(({ data }) => {
         console.log('got a new user', data);
         const jwtToken = data.register.id;
-
       })
       .catch((errors: any) => {
         console.log('there was an error sending the query', errors);

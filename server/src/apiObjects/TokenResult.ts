@@ -3,8 +3,8 @@ import { ObjectApi } from 'graphql-api-builder';
 import { getResolver } from '../resolvers';
 
 
-export const RegisterResult: ObjectApi = {
-  apiObject: 'RegisterResult',
+export const TokenResult: ObjectApi = {
+  apiObject: 'TokenResult',
   description: 'result of a successful registration',
   fields: [{
     apiField: 'id',
@@ -14,13 +14,13 @@ export const RegisterResult: ObjectApi = {
     allowedForView: true,
     inDb: true,
   }, {
-    apiField: 'id',
+    apiField: 'username',
     apiType: 'String',
-    description: 'user id',
+    description: 'the unique username',
     requiredForCreate: false,
     allowedForUpdate: false,
     allowedForView: true,
-    inDb: false,
+    inDb: true,
   }, {
     apiField: 'token',
     apiType: 'String',

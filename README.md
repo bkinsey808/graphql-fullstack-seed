@@ -39,3 +39,13 @@ If service worker, mutations will be executed against the service worker pouchdb
 which will get sync'd with the server pouchdb which will get sync'd with the Postgres db.
 
 Subscriptions will also be handled since all the db's involved support pubsub.
+
+## todo
+
+* display server-side errors on the client
+* mark fields as required
+* authentication, including routes
+* authorization, role-based security
+* https
+* http2?
+* offline
