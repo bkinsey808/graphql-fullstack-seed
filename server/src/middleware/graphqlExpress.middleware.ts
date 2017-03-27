@@ -3,7 +3,7 @@ import { GraphQLSchema } from 'graphql';
 import * as express from 'express';
 import { getExecutableSchema } from 'graphql-api-builder';
 
-import { dbObjects } from '../db';
+import { db } from '../db';
 import { objectApis } from '../apiObjects';
 
 
@@ -13,7 +13,7 @@ export const graphqlExpressMiddleware =
   graphqlExpress((request: express.Request) => ({
     schema,
     context: {
-      ...dbObjects,
+      db,
       request,
     },
   }));
