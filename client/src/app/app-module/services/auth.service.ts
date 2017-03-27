@@ -14,8 +14,13 @@ export class AuthService {
   }
 
   static getJwtToken() {
-    console.log('getting token');
-    return localStorage.getItem(LOCAL_STORAGE_JWT_TOKEN_KEY);
+    const notExpired = tokenNotExpired();
+    if (!notExpired) {
+      console.log('token expired');
+      return this.logout();
+    }
+    const token = localStorage.getItem(LOCAL_STORAGE_JWT_TOKEN_KEY);
+    return token;
   }
 
   static logout() {
@@ -24,7 +29,12 @@ export class AuthService {
 
   static isLoggedIn() {
     // angular2-jwt assumes token is id_token by default
-    return tokenNotExpired();
+    const notExpired = tokenNotExpired();
+    if (!notExpired) {
+      console.log('token expired');
+      this.logout();
+    }
+    return notExpired;
   }
 
   constructor() { }

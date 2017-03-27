@@ -18,4 +18,4 @@ export const createToken =
     jwt.sign(payload, privateKey, jwtSignOptions);
 
 export const decodeToken = (token: string) =>
-  jwt.verify(token, publicKey);
+  token && jwt.verify(token, publicKey);

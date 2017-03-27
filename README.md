@@ -42,7 +42,6 @@ Subscriptions will also be handled since all the db's involved support pubsub.
 
 ## todo
 
-* remove expired jwt token
 * display server-side errors on the client
 * mark fields as required
 * authentication, including routes
@@ -50,6 +49,7 @@ Subscriptions will also be handled since all the db's involved support pubsub.
 * abstract resolvers to keep isPgp check DRY
 * graphql subscriptions
 * support persisted query whitelisting
+* support NODE_ENV production or development
 * refactor according to https://dev-blog.apollodata.com/the-anatomy-of-a-graphql-query-6dffa9e9e747#.clu5rbnxc
 * testing!
 * https
