@@ -47,9 +47,11 @@ Subscriptions will also be handled since all the db's involved support pubsub.
 * mark fields as required
 * authentication, including routes
 * authorization, role-based security
+* abstract resolvers to keep isPgp check DRY
 * graphql subscriptions
 * support persisted query whitelisting
 * refactor according to https://dev-blog.apollodata.com/the-anatomy-of-a-graphql-query-6dffa9e9e747#.clu5rbnxc
+* testing!
 * https
 * http2?
 * offline
