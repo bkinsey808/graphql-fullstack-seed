@@ -1,5 +1,5 @@
-import { registerResolver } from './register';
-import { loginResolver } from './login';
+import { registerResolver } from './register.resolver';
+import { loginResolver } from './login.resolver';
 import {
   indexResolver,
   detailResolver,
@@ -20,4 +20,3 @@ const resolvers = {
 
 export const getResolver = (resolverType, objectApi) =>
   resolvers[resolverType](objectApi);
-

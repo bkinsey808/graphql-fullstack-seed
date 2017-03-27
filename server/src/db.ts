@@ -1,7 +1,7 @@
 import * as pgp from 'pg-promise';
 
 
-const cn: pgp.IConfig = {
+const connectionParameters: pgp.IConfig = {
   host: 'localhost',
   port: 5432,
   database: 'app_database',
@@ -10,9 +10,14 @@ const cn: pgp.IConfig = {
 };
 
 const pgpMain: pgp.IMain = pgp();
-const db = pgpMain(cn);
+const db: pgp.IDatabase<any> = pgpMain(connectionParameters);
 
-export const dbObjects = {
+interface DbObjects {
+  pgpMain: pgp.IMain;
+  db: pgp.IDatabase<any>;
+}
+
+export const dbObjects: DbObjects = {
   pgpMain,
   db
 };

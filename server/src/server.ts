@@ -1,73 +1,22 @@
-declare var require: any;
-
-import { GraphQLSchema } from 'graphql';
-import * as cors from 'cors';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
-import {
-  graphqlExpress,
-  graphiqlExpress
-} from 'graphql-server-express';
-import { invert } from 'lodash';
-import { getExecutableSchema } from 'graphql-api-builder';
+import { graphiqlExpress } from 'graphql-server-express';
 
-import { dbObjects } from './db';
-import { objectApis } from './apiObjects';
+import { corsMiddleware } from './middleware/cors.middleware';
+import { graphqlExpressMiddleware } from './middleware/graphqlExpress.middleware';
+import { persistedQueryMiddleware } from './middleware/persistedQuery.middleware';
 
-// What's the best way to import a json file without require?
-// Can anybody enlighten me?
-const queryMap = require('../../extracted_queries.json');
-
-const context = { ...dbObjects };
-
-const schema: GraphQLSchema = getExecutableSchema(objectApis);
-
-// const appGraphqlExpress = graphqlExpress({
-//   schema,
-//   context,
-//   debug: false, // TODO: set to true if NODE_ENV === 'development'
-// });
-
-const appGraphqlExpress = graphqlExpress(request => ({
-  schema,
-  context: {
-    ...dbObjects,
-    request,
-  },
-}));
-
-const appGraphiqlExpress = graphiqlExpress({
-  endpointURL: '/graphql',
-});
-
-const corsWhitelist = [
-  'http://localhost:4200',
-];
-const corsOptions = {
-  origin: (origin, callback) => {
-    const originIsWhitelisted = corsWhitelist.includes(origin);
-    callback(null, originIsWhitelisted);
-  },
-  credentials: true
-};
 
 const PORT = 3000;
 
-const persistedQueryMiddleware = (req, resp, next) => {
-  const invertedMap = invert(queryMap);
-  // todo remove && req.body.id on production for query whitelisting
-  if (req.body && req.body.id) {
-    req.body.query = invertedMap[req.body.id];
-  }
-  next();
-}
-
+// chaining express app calls enforces locality and brevity
+// you can think of this as the server overview
 express()
-  .use(cors(corsOptions))
+  .use(corsMiddleware)
   .use('/graphql', bodyParser.json())
   .use('/graphql', persistedQueryMiddleware)
-  .use('/graphql', appGraphqlExpress)
-  .use('/graphiql', appGraphiqlExpress)
+  .use('/graphql', graphqlExpressMiddleware)
+  .use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
   .use('/', express.static(path.join(__dirname, '../../client/dist')))
   .listen(PORT);

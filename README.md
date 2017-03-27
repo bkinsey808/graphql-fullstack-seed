@@ -42,10 +42,13 @@ Subscriptions will also be handled since all the db's involved support pubsub.
 
 ## todo
 
+* remove expired jwt token
 * display server-side errors on the client
 * mark fields as required
 * authentication, including routes
 * authorization, role-based security
+* graphql subscriptions
+* support persisted query whitelisting
 * https
 * http2?
 * offline

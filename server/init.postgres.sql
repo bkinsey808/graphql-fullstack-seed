@@ -1,4 +1,8 @@
-CREATE TABLE public.app_user
+-- the project currently only supports postgres.
+-- it is assumed db and user has been created and
+-- match with server/src/db.ts
+
+CREATE TABLE app_user
 (
   id uuid NOT NULL DEFAULT gen_random_uuid(),
   email text NOT NULL,

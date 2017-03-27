@@ -19,7 +19,7 @@ export const loginResolver = (objectApi: ObjectApi) =>
     if (!isPgp(context.db)) {
       throw new Error('unsupported db type');
     }
-    console.log(context.headers);
+    console.log('headers', context.request.headers);
     const queryVariables = [
       args.usernameOrEmail,
       args.password,
