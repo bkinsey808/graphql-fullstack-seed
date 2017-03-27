@@ -20,6 +20,7 @@ export const registerResolver = (objectApi: ObjectApi) =>
     if (!isPgp(context.db)) {
       throw new Error('unsupported db type');
     }
+    console.log(context.headers);
     const queryVariables = [
       args.username,
       args.email,

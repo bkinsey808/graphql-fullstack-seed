@@ -6,6 +6,7 @@ if (process.cwd().endsWith('/server')) {
   process.chdir('../');
 }
 const privateKey = readFileSync('./key/jwt.rsa').toString();
+const publicKey = readFileSync('./key/jwt.rsa.pub').toString();
 
 const jwtSignOptions: jwt.SignOptions = {
   expiresIn: 120,
@@ -15,3 +16,6 @@ const jwtSignOptions: jwt.SignOptions = {
 export const createToken =
   payload => 
     jwt.sign(payload, privateKey, jwtSignOptions);
+
+export const decodeToken = (token: string) =>
+  jwt.verify(token, publicKey);

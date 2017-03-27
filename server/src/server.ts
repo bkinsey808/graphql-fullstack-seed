@@ -23,11 +23,19 @@ const context = { ...dbObjects };
 
 const schema: GraphQLSchema = getExecutableSchema(objectApis);
 
-const appGraphqlExpress = graphqlExpress({
+// const appGraphqlExpress = graphqlExpress({
+//   schema,
+//   context,
+//   debug: false, // TODO: set to true if NODE_ENV === 'development'
+// });
+
+const appGraphqlExpress = graphqlExpress(request => ({
   schema,
-  context,
-  debug: false, // maybe set to true if NODE_ENV === 'development'
-});
+  context: {
+    ...dbObjects,
+    request,
+  },
+}));
 
 const appGraphiqlExpress = graphiqlExpress({
   endpointURL: '/graphql',

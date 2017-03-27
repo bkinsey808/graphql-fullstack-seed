@@ -9,6 +9,7 @@ import {
 } from 'graphql-api-builder';
 
 import { isPgp } from './utils';
+import { decodeToken } from '../jwt';
 
 
 export const indexResolver = (objectApi: ObjectApi) =>
@@ -16,6 +17,15 @@ export const indexResolver = (objectApi: ObjectApi) =>
     if (!isPgp(context.db)) {
       throw new Error('unsupported db type');
     }
+
+    let decodedToken;
+    try {
+      decodedToken = decodeToken(context.request.headers.authorization);
+      console.log('decoded token:', decodedToken);
+    } catch (err) {
+      console.log(err);
+    }
+
     const properties = {
       inDb: true,
       allowedForView: true,

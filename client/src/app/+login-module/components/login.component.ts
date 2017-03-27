@@ -17,6 +17,7 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/toPromise';
 
 import { ValidationService } from 'app/control-module/services/validation.service';
+import { AuthService } from 'app/app-module/services/auth.service';
 import { LoginMutation } from '../../../graphql/schema';
 
 
@@ -62,7 +63,7 @@ export class LoginComponent {
       .toPromise()
       .then(({ data }) => {
         console.log('logged in user', data);
-        const jwtToken = data.login.id;
+        AuthService.setJwtToken(data.login.token);
       })
       .catch((errors: any) => {
         console.log('there was an error sending the query', errors);
