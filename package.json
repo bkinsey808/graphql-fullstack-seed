@@ -9,7 +9,7 @@
     "server-build": "cd server && tsc && cd src && cp --parents `find -name \\*.sql` ../dist/",
     "server-prod": "node server/dist/server.js",
     "client-dev": "cd client && ng serve",
-    "client-build": "cd client && ng build --prod --aot",
+    "client-build": "cd client && ng build --prod",
     "dev": "npm-run-all --parallel server-dev client-dev",
     "build": "npm-run-all --parallel client-build server-build",
     "prod": "npm run server-prod",
