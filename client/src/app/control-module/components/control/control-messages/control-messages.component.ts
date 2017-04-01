@@ -5,7 +5,7 @@ import { ValidationService } from '../../../services/validation.service';
 
 
 @Component({
-  selector: 'control-messages',
+  selector: 'app-control-messages',
   templateUrl: './control-messages.component.html',
   styleUrls: ['./control-messages.component.css']
 })

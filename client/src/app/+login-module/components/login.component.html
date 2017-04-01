@@ -1,4 +1,5 @@
 <h2>Login</h2>
+<div *ngIf="errorMessage !== null">{{errorMessage}}</div>
 <form
   [formGroup]="form"
   (submit)="submit()"
@@ -17,6 +18,8 @@
       [formControl]="password"
     ></app-control>
   </div>
+
+Test: {{ test | async }}
 
   <button
     type="submit"
