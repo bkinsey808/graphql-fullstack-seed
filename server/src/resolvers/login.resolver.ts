@@ -29,7 +29,7 @@ export const loginResolver = (objectApi: ObjectApi) =>
     try {
       results = await context.db.one(sqlQuery, queryVariables);
     } catch (error) {
-      throw new Error('Login failed. Check your username or email and password.');
+      throw new Error('loginFailed');
     }
     return {
       ...results,
