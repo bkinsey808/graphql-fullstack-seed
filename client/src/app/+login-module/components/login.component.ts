@@ -114,6 +114,8 @@ export class LoginComponent {
             error.graphQLErrors.map((graphqlError) => graphqlError.message);
           if (errorMessages.includes('loginFailed')) {
             const errors = { loginFailed: true };
+
+            // can we do both these next 2 lines together automatically somehow?
             this.form.setErrors(errors);
             this.rawFormError$.next(errors);
           }

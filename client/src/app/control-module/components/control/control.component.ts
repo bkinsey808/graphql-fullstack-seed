@@ -1,4 +1,4 @@
-  import {
+import {
   Component,
   OnInit,
   Input,
@@ -7,7 +7,8 @@
   Type,
   forwardRef,
   ViewChild,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import {
   FormControl,
@@ -18,6 +19,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
+import { AppMessagesComponent } from './messages/messages.component';
 
 
 @Component({
@@ -40,6 +42,7 @@ export class ControlComponent implements OnInit, ControlValueAccessor {
   onChange: Function;
   onTouch: Function;
   inputRef: any;
+  public messageSource$ = new Subject();
 
   @Input() label: string;
   @Input() value: any;
@@ -55,7 +58,8 @@ export class ControlComponent implements OnInit, ControlValueAccessor {
 
   constructor(
     private viewContainerRef: ViewContainerRef,
-    private cfr: ComponentFactoryResolver
+    private cfr: ComponentFactoryResolver,
+    private ref: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {
@@ -68,11 +72,20 @@ export class ControlComponent implements OnInit, ControlValueAccessor {
       (<InputComponent>this.inputRef.instance).type = 'password';
     }
     const instance = <TextareaComponent | InputComponent>this.inputRef.instance;
-    (<Subject<string>>instance.change)
-      .subscribe((value: string) => this.onChange(value));
-    (<Subject<null>>instance.blur).subscribe(() => this.onTouch());
+    instance.change.subscribe((value: string) => this.onChange(value));
+    instance.blur.subscribe(() => {
+      this.onTouch();
+      const errors = Object.assign({}, this.formControl.errors);
+      this.messageSource$.next(errors);
+    });
     instance.focusOnInit = this.focusOnInit;
     this.inputRef.changeDetectorRef.detectChanges();
+
+    this.formControl.valueChanges.subscribe(x => {
+      if (this.formControl.touched) {
+        this.messageSource$.next(this.formControl.errors);
+      }
+    });
   }
 
   writeValue(value: any) {
