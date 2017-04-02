@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ValidationService } from './services/validation.service';
-import { ControlMessagesComponent } from './components/control/control-messages/control-messages.component';
+import { AppMessagesComponent } from './components/control/app-messages/app-messages.component';
 import { ControlComponent } from './components/control/control.component';
 import { InputComponent } from './components/control/input/input.component';
 import { TextareaComponent } from './components/control/textarea/textarea.component';
@@ -15,7 +15,7 @@ import { TextareaComponent } from './components/control/textarea/textarea.compon
   exports: [ ControlComponent ],
   declarations: [
     ControlComponent,
-    ControlMessagesComponent,
+    AppMessagesComponent,
     InputComponent,
     TextareaComponent
   ],

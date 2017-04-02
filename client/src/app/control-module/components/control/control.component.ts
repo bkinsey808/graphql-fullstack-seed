@@ -39,11 +39,13 @@ export class ControlComponent implements OnInit, ControlValueAccessor {
 
   onChange: Function;
   onTouch: Function;
+  inputRef: any;
 
   @Input() label: string;
   @Input() value: any;
   @Input() formControl: FormControl;
   @Input() formControlName: string;
+  @Input() focusOnInit: boolean;
 
   // supported control types
   @Input()
@@ -61,17 +63,16 @@ export class ControlComponent implements OnInit, ControlValueAccessor {
       this.type === 'textarea' ? TextareaComponent : InputComponent;
 
     const compFactory = this.cfr.resolveComponentFactory(componentType);
-    const inputRef = this.input.createComponent(compFactory);
+    this.inputRef = this.input.createComponent(compFactory);
     if (this.type === 'password') {
-      (<InputComponent>inputRef.instance).type = 'password';
+      (<InputComponent>this.inputRef.instance).type = 'password';
     }
-    (<Subject<string>>inputRef.instance.change).subscribe((value: string) => {
-      this.onChange(value);
-    });
-    (<Subject<null>>inputRef.instance.blur).subscribe(() => {
-      this.onTouch();
-    });
-    inputRef.changeDetectorRef.detectChanges();
+    const instance = <TextareaComponent | InputComponent>this.inputRef.instance;
+    (<Subject<string>>instance.change)
+      .subscribe((value: string) => this.onChange(value));
+    (<Subject<null>>instance.blur).subscribe(() => this.onTouch());
+    instance.focusOnInit = this.focusOnInit;
+    this.inputRef.changeDetectorRef.detectChanges();
   }
 
   writeValue(value: any) {

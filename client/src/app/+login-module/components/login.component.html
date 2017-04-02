@@ -1,5 +1,8 @@
 <h2>Login</h2>
 <div *ngIf="errorMessage !== null">{{errorMessage}}</div>
+
+Form errors:
+{{ formError$ | async | json }}
 <form
   [formGroup]="form"
   (submit)="submit()"
@@ -9,6 +12,7 @@
       label="Username or Email Address"
       formControlName="usernameOrEmail"
       [formControl]="usernameOrEmail"
+      [focusOnInit]="true"
     ></app-control>
 
     <app-control

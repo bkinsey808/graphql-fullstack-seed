@@ -20,7 +20,10 @@ import {
 } from 'apollo-client';
 import { DocumentNode } from 'graphql';
 import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs';
+import {
+  Observable,
+  Subscriber
+} from 'rxjs';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -46,10 +49,17 @@ export class LoginComponent {
   public form: FormGroup;
   public usernameOrEmail: FormControl;
   public password: FormControl;
+  public formError$: Observable<any>;
+  public rawFormError$: Subject<any>;
 
   constructor(private formBuilder: FormBuilder, private apollo: Apollo) {
     this.test = new Subject<string>();
 
+    this.initForm();
+    this.initErrorHandling();
+  }
+
+  initForm() {
     this.usernameOrEmail = new FormControl('', Validators.required);
     this.password = new FormControl('', Validators.required);
 
@@ -58,6 +68,25 @@ export class LoginComponent {
       password: this.password,
     });
   }
+
+  initErrorHandling() {
+    this.rawFormError$ = new Subject<any>();
+    this.formError$ =
+      this.rawFormError$.scan((obj, err) => Object.assign(obj, err), {});
+
+    const formSubscriber =
+      Subscriber.create(this.subscribeNext, this.subscribeError);
+    this.form.valueChanges.subscribe(formSubscriber);
+  }
+
+  subscribeNext(x) {
+    // console.log('form next: ',  x);
+  }
+
+  subscribeError(err) {
+    console.log('form error: ', err);
+  }
+
   submit() {
     if (this.form.dirty && this.form.valid) {
       // alert(`Username: ${this.registerForm.value.username} Email: ${this.registerForm.value.email}`);
@@ -73,8 +102,6 @@ export class LoginComponent {
       },
     };
 
-    console.log('sedign mutation');
-
     this.apollo.mutate<LoginMutation>(loginObject)
       .toPromise()
       .then(({ data }) => {
@@ -86,8 +113,9 @@ export class LoginComponent {
           const errorMessages =
             error.graphQLErrors.map((graphqlError) => graphqlError.message);
           if (errorMessages.includes('loginFailed')) {
-            console.log('yes, here');
-            this.form.setErrors({ loginFailed: true });
+            const errors = { loginFailed: true };
+            this.form.setErrors(errors);
+            this.rawFormError$.next(errors);
           }
         }
         console.log('keys', Object.keys(this.form.controls));

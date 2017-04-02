@@ -5,11 +5,11 @@ import { ValidationService } from '../../../services/validation.service';
 
 
 @Component({
-  selector: 'app-control-messages',
-  templateUrl: './control-messages.component.html',
-  styleUrls: ['./control-messages.component.css']
+  selector: 'app-messages',
+  templateUrl: './app-messages.component.html',
+  styleUrls: ['./app-messages.component.css']
 })
-export class ControlMessagesComponent {
+export class AppMessagesComponent {
   @Input() control: FormControl;
   constructor() { }
 

@@ -3,7 +3,8 @@ import {
   OnInit,
   Input,
   Output,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  ViewChild,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
@@ -17,13 +18,27 @@ import { Subject } from 'rxjs/Subject';
 })
 export class InputComponent {
 
+  public inputRef;
+
+  @ViewChild('input')
+  set input(ref) {
+    this.inputRef = ref;
+  }
+
   @Input() name: string;
   @Input() type: string;
+  @Input() focusOnInit: boolean;
 
   @Output() change: Subject<string> = new Subject<string>();
   @Output() blur: Subject<null> = new Subject<null>();
 
   constructor() { }
+
+  ngAfterViewInit() {
+    if (this.focusOnInit) {
+      this.inputRef.nativeElement.focus();
+    }
+  }
 
   onChange(inputValue) {
     this.change.next(inputValue);
@@ -32,4 +47,5 @@ export class InputComponent {
   onBlur() {
     this.blur.next();
   }
+
 }
