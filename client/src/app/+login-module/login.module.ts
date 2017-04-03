@@ -9,16 +9,17 @@ import { ControlModule } from 'app/control-module/control.module';
 import { LoginComponent } from './components/login.component';
 import { routing } from './login.routing';
 
+
 @NgModule({
   imports: [
     routing,
     CommonModule,
     ControlModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [
-    LoginComponent
+    LoginComponent,
   ]
 })
 export class LoginModule { }

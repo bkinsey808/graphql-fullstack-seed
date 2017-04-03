@@ -12,7 +12,10 @@ import { TextareaComponent } from './components/control/textarea/textarea.compon
   imports: [
     CommonModule
   ],
-  exports: [ ControlComponent ],
+  exports: [
+    ControlComponent,
+    AppMessagesComponent,
+  ],
   declarations: [
     ControlComponent,
     AppMessagesComponent,

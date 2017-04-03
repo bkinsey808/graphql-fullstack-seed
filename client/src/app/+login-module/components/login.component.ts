@@ -30,6 +30,7 @@ import 'rxjs/add/operator/toPromise';
 import { ValidationService } from 'app/control-module/services/validation.service';
 import { AuthService } from 'app/app-module/services/auth.service';
 import { LoginMutation } from '../../../graphql/schema';
+import { AppMessagesComponent } from '../../control-module/components/control/messages/messages.component';
 
 
 // todo figure out how to refactor this to not use require
@@ -49,8 +50,7 @@ export class LoginComponent {
   public form: FormGroup;
   public usernameOrEmail: FormControl;
   public password: FormControl;
-  public formError$: Observable<any>;
-  public rawFormError$: Subject<any>;
+  public formError$: Subject<any>;
 
   constructor(private formBuilder: FormBuilder, private apollo: Apollo) {
     this.test = new Subject<string>();
@@ -69,10 +69,9 @@ export class LoginComponent {
     });
   }
 
+
   initErrorHandling() {
-    this.rawFormError$ = new Subject<any>();
-    this.formError$ =
-      this.rawFormError$.scan((obj, err) => Object.assign(obj, err), {});
+    this.formError$ = new Subject<any>();
 
     const formSubscriber =
       Subscriber.create(this.subscribeNext, this.subscribeError);
@@ -117,7 +116,7 @@ export class LoginComponent {
 
             // can we do both these next 2 lines together automatically somehow?
             this.form.setErrors(errors);
-            this.rawFormError$.next(errors);
+            this.formError$.next(errors);
           }
         }
         console.log('keys', Object.keys(this.form.controls));
@@ -127,7 +126,7 @@ export class LoginComponent {
 
   get errorMessage() {
     // todo write this without a loop
-    console.log(this.form.errors);
+    // console.log(this.form.errors);
     for (let propertyName in this.form.errors) {
       if (
         this.form.errors.hasOwnProperty(propertyName) &&

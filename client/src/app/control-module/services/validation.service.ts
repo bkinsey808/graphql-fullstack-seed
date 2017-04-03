@@ -5,7 +5,7 @@ export class ValidationService {
 
   static getValidatorErrorMessage(
     validatorName: string,
-    validatorValue?: any
+    validatorValue: any = {}
   ) {
     const config = {
       'required': 'Required',

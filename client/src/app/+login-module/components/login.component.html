@@ -1,8 +1,10 @@
 <h2>Login</h2>
-<div *ngIf="errorMessage !== null">{{errorMessage}}</div>
 
-Form errors:
-{{ formError$ | async | json }}
+<app-messages
+  #messages
+  [messageSource]="formError$"
+></app-messages>
+
 <form
   [formGroup]="form"
   (submit)="submit()"

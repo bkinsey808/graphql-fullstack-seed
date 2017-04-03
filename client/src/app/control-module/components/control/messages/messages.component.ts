@@ -23,38 +23,29 @@ import { ValidationService } from '../../../services/validation.service';
 })
 export class AppMessagesComponent implements OnInit {
 
-  public messages: Observable<any>;
+  public message$: Observable<any>;
 
-  @Input() messageSource: Observable<any>;
+  @Input('messageSource') messageSource$: Observable<any>;
 
   constructor() {
   }
 
   ngOnInit() {
-    this.messages = this.messageSource.map(
-      x => x && Object.keys(x).length > 0 ? JSON.stringify(x) : ''
-    );
-  }
-
-  // get errorMessage() {
-  //   // todo write this without a loop
-  //   for (let propertyName in this.messageSource.errors) {
-  //     if (
-  //       this.messageSource.errors.hasOwnProperty(propertyName) &&
-  //       this.messageSource.touched
-  //     ) {
-  //       return ValidationService.getValidatorErrorMessage(
-  //         propertyName,
-  //         this.messageSource.errors[propertyName]
-  //       );
-  //     }
-  //   }
-
-  //   return null;
-  // }
-
-  get showMessages() {
-    return true;
+    this.message$ = this.messageSource$
+      .scan((obj, err) => Object.assign(obj, err), {})
+      .map((obj => {
+        return Object.keys(obj)
+          .reduce((errorArray, key) => {
+            try {
+              if (obj[key]) {
+                errorArray.push(ValidationService.getValidatorErrorMessage(key))
+              }
+            } catch(e) {
+              console.log('err here', e);
+            }
+            return errorArray;
+          }, []).join(' ');
+      }));
   }
 }
 
