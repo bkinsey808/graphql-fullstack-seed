@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MaterialModule } from '@angular/material';
+
 import {
   FormsModule,
   ReactiveFormsModule
@@ -17,6 +19,7 @@ import { routing } from './login.routing';
     ControlModule,
     FormsModule,
     ReactiveFormsModule,
+    MaterialModule,
   ],
   declarations: [
     LoginComponent,
