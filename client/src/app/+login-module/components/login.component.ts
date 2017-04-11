@@ -61,7 +61,10 @@ export class LoginComponent {
 
   initForm() {
     this.usernameOrEmail = new FormControl('', Validators.required);
-    this.password = new FormControl('', Validators.required);
+    this.password = new FormControl('', [
+      Validators.required,
+      ValidationService.passwordValidator,
+    ]);
 
     this.form = new FormGroup({
       usernameOrEmail: this.usernameOrEmail,
