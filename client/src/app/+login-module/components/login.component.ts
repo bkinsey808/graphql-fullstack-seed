@@ -51,25 +51,66 @@ export class LoginComponent {
   public usernameOrEmail: FormControl;
   public password: FormControl;
   public formError$: Subject<any>;
+  public usernameOrEmailError$: Subject<any>;
+  public passwordError$: Subject<any>;
+  private usernameOrEmailSubscriber;
+  private passwordSubscriber;
 
   constructor(private formBuilder: FormBuilder, private apollo: Apollo) {
-    this.test = new Subject<string>();
+    this.formError$ = new Subject<string>();
+    this.usernameOrEmailError$ = new Subject<string>();
+    this.passwordError$ = new Subject<string>();
 
     this.initForm();
     this.initErrorHandling();
+
+    this.usernameOrEmailSubscriber = this.getFormControlErrorSubscriber(
+      this.usernameOrEmail,
+      this.usernameOrEmailError$
+    );
+    this.passwordSubscriber = this.getFormControlErrorSubscriber(
+      this.password,
+      this.passwordError$
+    );
+
+  }
+
+  getFormControlErrorSubscriber(
+    formControl: FormControl,
+    error$: Subject<any>
+  ) {
+    return Subscriber.create(x => {
+      if (formControl.touched) {
+        console.log(formControl.errors);
+        error$.next(formControl.errors);
+      }
+    });
   }
 
   initForm() {
     this.usernameOrEmail = new FormControl('', Validators.required);
-    this.password = new FormControl('', [
-      Validators.required,
-      ValidationService.passwordValidator,
-    ]);
+    this.password = new FormControl('', ValidationService.passwordValidator);
 
     this.form = new FormGroup({
       usernameOrEmail: this.usernameOrEmail,
       password: this.password,
     });
+
+    this.usernameOrEmail.valueChanges.subscribe(this.usernameOrEmailSubscriber);
+    this.password.valueChanges.subscribe(this.passwordSubscriber);
+  }
+
+
+  usernameOrEmailBlur() {
+    if (this.usernameOrEmail.touched) {
+      this.usernameOrEmailError$.next(this.usernameOrEmail.errors);
+    }
+  }
+
+  passwordBlur() {
+    if (this.password.touched) {
+      this.passwordError$.next(this.password.errors);
+    }
   }
 
 
@@ -90,11 +131,6 @@ export class LoginComponent {
   }
 
   submit() {
-    if (this.form.dirty && this.form.valid) {
-      // alert(`Username: ${this.registerForm.value.username} Email: ${this.registerForm.value.email}`);
-    }
-
-    this.test.next('x' + Math.random());
 
     const loginObject = {
       mutation: LoginMutationNode,
@@ -125,7 +161,9 @@ export class LoginComponent {
         console.log('keys', Object.keys(this.form.controls));
         console.log('there was an error sending the query', error);
       });
+    return false;
   }
+
 
   get errorMessage() {
     // todo write this without a loop

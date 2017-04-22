@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@angular/material';
+import { NgxErrorsModule } from '@ultimate/ngxerrors';
 
 import {
   FormsModule,
@@ -20,6 +21,7 @@ import { routing } from './login.routing';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    NgxErrorsModule,
   ],
   declarations: [
     LoginComponent,

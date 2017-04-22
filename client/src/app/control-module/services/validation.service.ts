@@ -7,8 +7,9 @@ export class ValidationService {
     validatorName: string,
     validatorValue: any = {}
   ) {
+    console.log('validator value: ', validatorValue);
     const config = {
-      'required': 'Required',
+      'required': `${validatorValue.controlName} Required`,
       'invalidEmailAddress': 'Invalid email address',
       'loginFailed': 'Login failed. Check your username or email address, or password.',
       'invalidPassword': 'Invalid password. Password must be at least 6 characters long, and contain a number.',

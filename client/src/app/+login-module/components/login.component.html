@@ -1,7 +1,6 @@
 <h2>Login</h2>
 
 <app-messages
-  #messages
   [messageSource]="formError$"
 ></app-messages>
 
@@ -16,9 +15,13 @@
         mdInput
         placeholder="Username or Email Address"
         formControlName="usernameOrEmail"
+        (blur)="usernameOrEmailBlur()"
         required
       >
     </md-input-container>
+    <app-messages
+      [messageSource]="usernameOrEmailError$"
+    ></app-messages>
 
     <md-input-container mdError="heelo" style="width: 100%">
       <input
@@ -26,10 +29,13 @@
         placeholder="Password"
         type="password"
         formControlName="password"
+        (blur)="passwordBlur()"
         required
       >
     </md-input-container>
-    <div mdError>this is an error</div>
+    <app-messages
+      [messageSource]="passwordError$"
+    ></app-messages>
 
     <!--<app-control
       label="Username or Email Address"
