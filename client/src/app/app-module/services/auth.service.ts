@@ -3,7 +3,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 
 
 // id_token is chosen because it is a default in angular2-jwt
-const LOCAL_STORAGE_JWT_TOKEN_KEY = 'id_token';
+const LOCAL_STORAGE_JWT_TOKEN_KEY = 'token';
 
 @Injectable()
 export class AuthService {

@@ -12,8 +12,9 @@ import {
 } from '@angular/forms';
 import {
   Apollo,
-  ApolloQueryObservable
+  ApolloQueryObservable,
 } from 'apollo-angular';
+import { MutationOptions } from 'apollo-client'
 import {
   ApolloQueryResult,
   ApolloError
@@ -22,10 +23,14 @@ import { DocumentNode } from 'graphql';
 import { Subject } from 'rxjs/Subject';
 import {
   Observable,
-  Subscriber
+  Subscriber,
+  Observer,
 } from 'rxjs';
+import { take } from "../../../../node_modules/rxjs/operator/take";
 
-import 'rxjs/add/operator/toPromise';
+import { tokenNotExpired } from 'angular2-jwt';
+import { JwtHelper } from 'angular2-jwt';
+
 
 import { ValidationService } from 'app/control-module/services/validation.service';
 import { AuthService } from 'app/app-module/services/auth.service';
@@ -45,46 +50,12 @@ const LoginMutationNode: DocumentNode =
 })
 export class LoginComponent {
 
-  public test: Subject<string>;
-
   public form: FormGroup;
   public usernameOrEmail: FormControl;
   public password: FormControl;
-  public formError$: Subject<any>;
-  public usernameOrEmailError$: Subject<any>;
-  public passwordError$: Subject<any>;
-  private usernameOrEmailSubscriber;
-  private passwordSubscriber;
 
   constructor(private formBuilder: FormBuilder, private apollo: Apollo) {
-    this.formError$ = new Subject<string>();
-    this.usernameOrEmailError$ = new Subject<string>();
-    this.passwordError$ = new Subject<string>();
-
     this.initForm();
-    this.initErrorHandling();
-
-    this.usernameOrEmailSubscriber = this.getFormControlErrorSubscriber(
-      this.usernameOrEmail,
-      this.usernameOrEmailError$
-    );
-    this.passwordSubscriber = this.getFormControlErrorSubscriber(
-      this.password,
-      this.passwordError$
-    );
-
-  }
-
-  getFormControlErrorSubscriber(
-    formControl: FormControl,
-    error$: Subject<any>
-  ) {
-    return Subscriber.create(x => {
-      if (formControl.touched) {
-        console.log(formControl.errors);
-        error$.next(formControl.errors);
-      }
-    });
   }
 
   initForm() {
@@ -95,93 +66,43 @@ export class LoginComponent {
       usernameOrEmail: this.usernameOrEmail,
       password: this.password,
     });
-
-    this.usernameOrEmail.valueChanges.subscribe(this.usernameOrEmailSubscriber);
-    this.password.valueChanges.subscribe(this.passwordSubscriber);
   }
 
-
-  usernameOrEmailBlur() {
-    if (this.usernameOrEmail.touched) {
-      this.usernameOrEmailError$.next(this.usernameOrEmail.errors);
-    }
+  getLoginObserver(): Observer<ApolloQueryResult<LoginMutation>> {
+    const next = ({ data }) => {
+      console.log('logged in user', data);
+      AuthService.setJwtToken(data.login.token);
+    };
+    const error = (error) => {
+      if (error instanceof ApolloError) {
+        const errorMessages =
+          error.graphQLErrors.map((graphqlError) => graphqlError.message);
+        if (errorMessages.includes('loginFailed')) {
+          this.form.setErrors({ loginFailed: true });
+        }
+      }
+      console.log('keys', Object.keys(this.form.controls));
+      console.log('there was an error sending the query', error);
+    };
+    const complete = () => console.log('complete');
+    return { next, error, complete };
   }
 
-  passwordBlur() {
-    if (this.password.touched) {
-      this.passwordError$.next(this.password.errors);
-    }
-  }
-
-
-  initErrorHandling() {
-    this.formError$ = new Subject<any>();
-
-    const formSubscriber =
-      Subscriber.create(this.subscribeNext, this.subscribeError);
-    this.form.valueChanges.subscribe(formSubscriber);
-  }
-
-  subscribeNext(x) {
-    // console.log('form next: ',  x);
-  }
-
-  subscribeError(err) {
-    console.log('form error: ', err);
-  }
-
-  submit() {
-
-    const loginObject = {
+  getLoginMutationOptions(): MutationOptions {
+    return {
       mutation: LoginMutationNode,
       variables: {
         usernameOrEmail: this.form.value.usernameOrEmail,
         password: this.form.value.password,
       },
     };
-
-    this.apollo.mutate<LoginMutation>(loginObject)
-      .toPromise()
-      .then(({ data }) => {
-        console.log('logged in user', data);
-        AuthService.setJwtToken(data.login.token);
-      })
-      .catch((error) => {
-        if (error instanceof ApolloError) {
-          const errorMessages =
-            error.graphQLErrors.map((graphqlError) => graphqlError.message);
-          if (errorMessages.includes('loginFailed')) {
-            const errors = { loginFailed: true };
-
-            // can we do both these next 2 lines together automatically somehow?
-            this.form.setErrors(errors);
-            this.formError$.next(errors);
-          }
-        }
-        console.log('keys', Object.keys(this.form.controls));
-        console.log('there was an error sending the query', error);
-      });
-    return false;
   }
 
-
-  get errorMessage() {
-    // todo write this without a loop
-    // console.log(this.form.errors);
-    for (let propertyName in this.form.errors) {
-      if (
-        this.form.errors.hasOwnProperty(propertyName) &&
-        this.form.touched
-      ) {
-        return ValidationService.getValidatorErrorMessage(
-          propertyName,
-          this.form.errors[propertyName]
-        );
-      }
-    }
-
-    return null;
+  submit() {
+    this.apollo.mutate<LoginMutation>(
+      this.getLoginMutationOptions()
+    )
+      .subscribe(this.getLoginObserver());
   }
-
 
 }
