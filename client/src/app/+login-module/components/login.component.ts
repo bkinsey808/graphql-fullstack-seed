@@ -3,6 +3,7 @@ declare var require: any;
 import {
   Component,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -26,11 +27,8 @@ import {
   Subscriber,
   Observer,
 } from 'rxjs';
-import { take } from "../../../../node_modules/rxjs/operator/take";
 
 import { tokenNotExpired } from 'angular2-jwt';
-import { JwtHelper } from 'angular2-jwt';
-
 
 import { ValidationService } from 'app/control-module/services/validation.service';
 import { AuthService } from 'app/app-module/services/auth.service';
@@ -46,7 +44,7 @@ const LoginMutationNode: DocumentNode =
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
 
@@ -54,7 +52,11 @@ export class LoginComponent {
   public usernameOrEmail: FormControl;
   public password: FormControl;
 
-  constructor(private formBuilder: FormBuilder, private apollo: Apollo) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private apollo: Apollo,
+    private cdr: ChangeDetectorRef,
+  ) {
     this.initForm();
   }
 
@@ -79,6 +81,7 @@ export class LoginComponent {
           error.graphQLErrors.map((graphqlError) => graphqlError.message);
         if (errorMessages.includes('loginFailed')) {
           this.form.setErrors({ loginFailed: true });
+          this.cdr.detectChanges();
         }
       }
       console.log('keys', Object.keys(this.form.controls));

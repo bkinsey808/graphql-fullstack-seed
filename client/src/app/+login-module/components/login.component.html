@@ -1,19 +1,25 @@
 <h2>Login</h2>
 
-<form
-  [formGroup]="form"
-  (submit)="submit()"
->
+<form [formGroup]="form" (submit)="submit()">
   <div class="form-controls">
+
+    <div
+      *ngIf="form.hasError('loginFailed')"
+    >Login Failed</div>
 
     <md-input-container style="width: 100%">
       <input
-        mdInput
-        placeholder="Username or Email Address"
+        mdInput placeholder="Username or Email Address"
         formControlName="usernameOrEmail"
         required
       >
     </md-input-container>
+    <div ngxErrors="usernameOrEmail">
+      <div
+        ngxError="required"
+        [when]="['dirty', 'touched']"
+      >Username or Email Address is required</div>
+    </div>
 
     <md-input-container style="width: 100%">
       <input
@@ -24,6 +30,12 @@
         required
       >
     </md-input-container>
+    <div ngxErrors="password">
+      <div
+        ngxError="invalidPassword"
+        [when]="['dirty', 'touched']"
+      >Password is not valid</div>
+    </div>
   </div>
 
   <button
