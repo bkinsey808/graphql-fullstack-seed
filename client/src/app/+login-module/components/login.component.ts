@@ -61,13 +61,22 @@ export class LoginComponent {
   }
 
   initForm() {
-    this.usernameOrEmail = new FormControl('', Validators.required);
-    this.password = new FormControl('', ValidationService.passwordValidator);
+    this.usernameOrEmail =
+      new FormControl('', [
+        Validators.required,
+        ValidationService.minAndMaxLengthValidator({
+          minLength: 2,
+          maxLength: 12,
+      })]);
+    this.password =
+      new FormControl('', ValidationService.passwordValidator);
 
     this.form = new FormGroup({
       usernameOrEmail: this.usernameOrEmail,
       password: this.password,
     });
+
+//    console.log(this.form.controls.usernameOrEmail.);
   }
 
   getLoginObserver(): Observer<ApolloQueryResult<LoginMutation>> {

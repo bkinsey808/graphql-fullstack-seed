@@ -9,16 +9,33 @@
 
     <md-input-container style="width: 100%">
       <input
-        mdInput placeholder="Username or Email Address"
+        mdInput
+        placeholder="Username or Email Address"
         formControlName="usernameOrEmail"
         required
       >
     </md-input-container>
-    <div ngxErrors="usernameOrEmail">
+    <div
+      ngxErrors="usernameOrEmail"
+      #usernameOrEmailError="ngxErrors"
+    >
       <div
         ngxError="required"
         [when]="['dirty', 'touched']"
       >Username or Email Address is required</div>
+      <div
+        ngxError="minAndMaxLengthError"
+        [when]="['dirty', 'touched']"
+      >
+        Username or Email Address must be min length
+        {{
+          usernameOrEmailError.getError('minAndMaxLengthError')?.minLength
+        }}
+        and max length
+        {{
+          usernameOrEmailError.getError('minAndMaxLengthError')?.maxLength
+        }}
+      </div>
     </div>
 
     <md-input-container style="width: 100%">

@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import {
+  AbstractControl,
+  ValidatorFn
+} from '@angular/forms';
 
 @Injectable()
 export class ValidationService {
@@ -36,6 +40,20 @@ export class ValidationService {
       return null;
     } else {
       return { 'invalidPassword': true };
+    }
+  }
+
+  static minAndMaxLengthValidator(options): ValidatorFn {
+    return (control: AbstractControl): {
+      [key: string]: any
+    } => {
+      if (
+        control.value.length > options.maxLength ||
+        control.value.length < options.minLength
+      ) {
+        return { minAndMaxLengthError: options };
+      }
+      return null;
     }
   }
 
