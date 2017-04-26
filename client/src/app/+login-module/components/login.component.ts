@@ -11,29 +11,18 @@ import {
   FormGroup,
   FormControl,
 } from '@angular/forms';
-import {
-  Apollo,
-  ApolloQueryObservable,
-} from 'apollo-angular';
+import { Apollo } from 'apollo-angular';
 import { MutationOptions } from 'apollo-client'
 import {
   ApolloQueryResult,
   ApolloError
 } from 'apollo-client';
 import { DocumentNode } from 'graphql';
-import { Subject } from 'rxjs/Subject';
-import {
-  Observable,
-  Subscriber,
-  Observer,
-} from 'rxjs';
-
-import { tokenNotExpired } from 'angular2-jwt';
+import { Observer } from 'rxjs';
 
 import { ValidationService } from 'app/control-module/services/validation.service';
 import { AuthService } from 'app/app-module/services/auth.service';
 import { LoginMutation } from '../../../graphql/schema';
-import { AppMessagesComponent } from '../../control-module/components/control/messages/messages.component';
 
 
 // todo figure out how to refactor this to not use require
