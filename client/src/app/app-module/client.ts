@@ -1,9 +1,6 @@
 declare var require: any;
 
-import {
-  ApolloClient,
-  createNetworkInterface
-} from 'apollo-client';
+import { ApolloClient } from 'apollo-client';
 import { PersistedQueryNetworkInterface } from 'persistgraphql';
 
 import { AuthService } from './services/auth.service';

@@ -4,24 +4,104 @@
   (submit)="submit()"
 >
   <div class="form-controls">
-    <app-control
-      label="Username"
-      formControlName="username"
-      [formControl]="username"
-    ></app-control>
 
-    <app-control
-      label="Email"
-      formControlName="email"
-      [formControl]="email"
-    ></app-control>
+    <div
+      *ngIf="form.hasError('registrationFailed')"
+    >Registration Failed</div>
 
-    <app-control
-      label="Password"
-      type="password"
-      formControlName="password"
-      [formControl]="password"
-    ></app-control>
+    <md-input-container style="width: 100%">
+      <input
+        mdInput
+        placeholder="Email Address"
+        formControlName="email"
+        required
+      >
+    </md-input-container>
+    <div
+      ngxErrors="email"
+      #usernameOrEmailError="ngxErrors"
+    >
+      <div
+        ngxError="required"
+        [when]="['dirty', 'touched']"
+      >Email Address is required</div>
+      <div
+        ngxError="minAndMaxLengthError"
+        [when]="['dirty', 'touched']"
+      >
+        Email Address must be min length
+        {{
+          email.getError('minAndMaxLengthError')?.minLength
+        }}
+        and max length
+        {{
+          email.getError('minAndMaxLengthError')?.maxLength
+        }}
+      </div>
+    </div>
+
+    <md-input-container style="width: 100%">
+      <input
+        mdInput
+        placeholder="Username"
+        formControlName="username"
+        required
+      >
+    </md-input-container>
+    <div
+      ngxErrors="username"
+      #usernameOrEmailError="ngxErrors"
+    >
+      <div
+        ngxError="required"
+        [when]="['dirty', 'touched']"
+      >Username is required</div>
+      <div
+        ngxError="minAndMaxLengthError"
+        [when]="['dirty', 'touched']"
+      >
+        Username must be min length
+        {{
+          username.getError('minAndMaxLengthError')?.minLength
+        }}
+        and max length
+        {{
+          username.getError('minAndMaxLengthError')?.maxLength
+        }}
+      </div>
+    </div>
+
+    <md-input-container style="width: 100%">
+      <input
+        mdInput
+        placeholder="Password"
+        formControlName="password"
+        type="password"
+        required
+      >
+    </md-input-container>
+    <div
+      ngxErrors="password"
+      #usernameOrEmailError="ngxErrors"
+    >
+      <div
+        ngxError="required"
+        [when]="['dirty', 'touched']"
+      >Password is required</div>
+      <div
+        ngxError="minAndMaxLengthError"
+        [when]="['dirty', 'touched']"
+      >
+        Password must be min length
+        {{
+          password.getError('minAndMaxLengthError')?.minLength
+        }}
+        and max length
+        {{
+          password.getError('minAndMaxLengthError')?.maxLength
+        }}
+      </div>
+    </div>
   </div>
 
   <button

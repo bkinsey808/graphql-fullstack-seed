@@ -6,7 +6,6 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import {
-  FormBuilder,
   Validators,
   FormGroup,
   FormControl,
@@ -42,7 +41,6 @@ export class LoginComponent {
   public password: FormControl;
 
   constructor(
-    private formBuilder: FormBuilder,
     private apollo: Apollo,
     private cdr: ChangeDetectorRef,
   ) {
@@ -64,8 +62,6 @@ export class LoginComponent {
       usernameOrEmail: this.usernameOrEmail,
       password: this.password,
     });
-
-//    console.log(this.form.controls.usernameOrEmail.);
   }
 
   getLoginObserver(): Observer<ApolloQueryResult<LoginMutation>> {

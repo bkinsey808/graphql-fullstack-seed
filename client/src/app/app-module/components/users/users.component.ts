@@ -3,16 +3,12 @@ declare var require: any;
 import {
   Component,
   OnInit,
-  AfterViewInit,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import {
   Apollo,
   ApolloQueryObservable
 } from 'apollo-angular';
-import { ApolloQueryResult } from 'apollo-client';
-import { Subject } from 'rxjs/Subject';
 import { DocumentNode } from 'graphql';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
@@ -27,7 +23,8 @@ const UsersQueryNode: DocumentNode = require('graphql-tag/loader!../../../../gra
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  styleUrls: ['./users.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersComponent implements OnInit {
   public users: ApolloQueryObservable<UsersQuery>;

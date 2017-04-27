@@ -1,12 +1,10 @@
 import {
   Component,
-  OnInit,
   Input,
   Output,
   ChangeDetectionStrategy,
   ViewChild,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
 
 

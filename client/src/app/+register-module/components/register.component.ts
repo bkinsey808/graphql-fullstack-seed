@@ -3,18 +3,21 @@ declare var require: any;
 import {
   Component,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import {
-  FormBuilder,
   Validators,
   FormGroup,
   FormControl,
 } from '@angular/forms';
-import { Apollo, ApolloQueryObservable } from 'apollo-angular';
-import { ApolloQueryResult } from 'apollo-client';
+import { Apollo } from 'apollo-angular';
+import { MutationOptions } from 'apollo-client'
+import {
+  ApolloQueryResult,
+  ApolloError
+} from 'apollo-client';
 import { DocumentNode } from 'graphql';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/toPromise';
+import { Observer } from 'rxjs';
 
 import { ValidationService } from 'app/control-module/services/validation.service';
 import { AuthService } from 'app/app-module/services/auth.service';
@@ -38,7 +41,14 @@ export class RegisterComponent {
   public email: FormControl;
   public password: FormControl;
 
-  constructor(private formBuilder: FormBuilder, private apollo: Apollo) {
+  constructor(
+    private apollo: Apollo,
+    private cdr: ChangeDetectorRef,
+  ) {
+    this.initForm();
+  }
+
+  initForm() {
     this.username = new FormControl('', Validators.required);
     this.password = new FormControl('', ValidationService.passwordValidator);
     this.email = new FormControl('', ValidationService.emailValidator);
@@ -50,29 +60,40 @@ export class RegisterComponent {
     });
   }
 
-  submit() {
-    if (this.form.dirty && this.form.valid) {
-      // alert(`Username: ${this.registerForm.value.username} Email: ${this.registerForm.value.email}`);
-    }
-
-    const registerObject = {
-      mutation: RegisterMutationNode,
-      variables: {
-        username: this.form.value.username,
-        email: this.form.value.email,
-        password: this.form.value.password,
-      },
+  getRegisterObserver(): Observer<ApolloQueryResult<RegisterMutation>> {
+    const next = ({ data }) => {
+      console.log('logged in user', data);
+      AuthService.setJwtToken(data.register.token);
     };
-
-    this.apollo.mutate<RegisterMutation>(registerObject)
-      .toPromise()
-      .then(({ data }) => {
-        console.log('got a new user', data);
-        AuthService.setJwtToken(data.register.token);
-      })
-      .catch((errors: any) => {
-        console.log('there was an error sending the query', errors);
-      });
+    const error = (error) => {
+      if (error instanceof ApolloError) {
+        const errorMessages =
+          error.graphQLErrors.map((graphqlError) => graphqlError.message);
+        if (errorMessages.includes('RegisterFailed')) {
+          this.form.setErrors({ RegisterFailed: true });
+          this.cdr.detectChanges();
+        }
+      }
+      console.log('keys', Object.keys(this.form.controls));
+      console.log('there was an error sending the query', error);
+    };
+    const complete = () => console.log('complete');
+    return { next, error, complete };
   }
+
+  getRegisterMutationOptions(): MutationOptions {
+    return {
+      mutation: RegisterMutationNode,
+      variables: this.form.value,
+    };
+  }
+
+  submit() {
+    this.apollo.mutate<RegisterMutation>(
+      this.getRegisterMutationOptions()
+    )
+      .subscribe(this.getRegisterObserver());
+  }
+
 
 }
