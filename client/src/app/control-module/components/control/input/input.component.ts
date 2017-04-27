@@ -1,12 +1,10 @@
 import {
   Component,
-  OnInit,
   Input,
   Output,
   ChangeDetectionStrategy,
   ViewChild,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
 
 
@@ -14,7 +12,7 @@ import { Subject } from 'rxjs/Subject';
   selector: 'app-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputComponent {
 

@@ -4,6 +4,8 @@ import {
   FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
+import { MaterialModule } from '@angular/material';
+import { NgxErrorsModule } from '@ultimate/ngxerrors';
 
 import { ControlModule } from 'app/control-module/control.module';
 import { RegisterComponent } from './components/register.component';
@@ -15,7 +17,9 @@ import { routing } from './register.routing';
     CommonModule,
     ControlModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule,
+    NgxErrorsModule,
   ],
   declarations: [
     RegisterComponent

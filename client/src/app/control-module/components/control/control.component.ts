@@ -8,7 +8,6 @@ import {
   forwardRef,
   ViewChild,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
 } from '@angular/core';
 import {
   FormControl,
@@ -19,7 +18,6 @@ import { Subject } from 'rxjs/Subject';
 
 import { InputComponent } from './input/input.component';
 import { TextareaComponent } from './textarea/textarea.component';
-import { AppMessagesComponent } from './messages/messages.component';
 
 
 @Component({
@@ -57,9 +55,7 @@ export class ControlComponent implements OnInit, ControlValueAccessor {
   @ViewChild('input', { read: ViewContainerRef }) input;
 
   constructor(
-    private viewContainerRef: ViewContainerRef,
     private cfr: ComponentFactoryResolver,
-    private ref: ChangeDetectorRef,
   ) { }
 
   ngOnInit() {

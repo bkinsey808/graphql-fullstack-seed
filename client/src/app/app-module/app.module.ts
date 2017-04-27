@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
 
 import { AuthService } from './services/auth.service';
-import { RegisterModule } from 'app/+register-module/register.module';
 import { AppRoutingModule } from '../app-routing-module/app-routing.module';
 import { AppComponent } from './components/app.component';
 import { getClient } from './client';

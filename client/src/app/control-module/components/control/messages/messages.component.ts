@@ -4,12 +4,6 @@ import {
   ChangeDetectionStrategy,
   OnInit,
 } from '@angular/core';
-import {
-  Form,
-  FormGroup,
-  FormControl,
-} from '@angular/forms';
-import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 
 import { ValidationService } from '../../../services/validation.service';
