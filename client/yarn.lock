@@ -145,9 +145,9 @@
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.9.0.tgz#fccf859f0d2817687f210737dc3be48a18b1d754"
 
-"@types/isomorphic-fetch@0.0.33":
-  version "0.0.33"
-  resolved "https://registry.yarnpkg.com/@types/isomorphic-fetch/-/isomorphic-fetch-0.0.33.tgz#3ea1b86f8b73e6a7430d01d4dbd5b1f63fd72718"
+"@types/isomorphic-fetch@0.0.34":
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/@types/isomorphic-fetch/-/isomorphic-fetch-0.0.34.tgz#3c3483e606c041378438e951464f00e4e60706d6"
 
 "@types/jasmine@2.5.38":
   version "2.5.38"
@@ -255,9 +255,9 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-angular2-jwt@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/angular2-jwt/-/angular2-jwt-0.2.2.tgz#c7ba295daffb837c698fbe83ecfe0ecfa29b3f4f"
+angular2-jwt@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/angular2-jwt/-/angular2-jwt-0.2.3.tgz#54efdda3ceedba85f6a37b165f22ac22b8adf021"
 
 ansi-align@^1.1.0:
   version "1.1.0"
@@ -300,9 +300,9 @@ anymatch@^1.3.0:
     arrify "^1.0.0"
     micromatch "^2.1.5"
 
-apollo-angular@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/apollo-angular/-/apollo-angular-0.12.0.tgz#92edc273f686942cb966d3faa44a2fea1c0b8c84"
+apollo-angular@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/apollo-angular/-/apollo-angular-0.13.0.tgz#a274a177c8dcc98180cda4026a2515889f5246be"
   dependencies:
     apollo-client-rxjs "~0.5.2"
 
@@ -310,9 +310,9 @@ apollo-client-rxjs@~0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/apollo-client-rxjs/-/apollo-client-rxjs-0.5.2.tgz#396604b5cd6e9ce0ba4e91ca2af59df35fe92856"
 
-apollo-client@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.0.4.tgz#af75db8cdd27e08a835ddfb39807849e178540f9"
+apollo-client@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.1.1.tgz#b5fc0b92ca16ac3adcab4cf19ddb871ccfa65652"
   dependencies:
     graphql "^0.9.3"
     graphql-anywhere "^3.0.1"
@@ -323,16 +323,16 @@ apollo-client@^1.0.4:
   optionalDependencies:
     "@types/async" "^2.0.31"
     "@types/graphql" "^0.9.0"
-    "@types/isomorphic-fetch" "0.0.33"
+    "@types/isomorphic-fetch" "0.0.34"
 
-apollo-codegen@^0.10.11:
-  version "0.10.11"
-  resolved "https://registry.yarnpkg.com/apollo-codegen/-/apollo-codegen-0.10.11.tgz#f40fde299f41dae4767f432474bc7d9cf6b7c6a5"
+apollo-codegen@^0.10.12:
+  version "0.10.12"
+  resolved "https://registry.yarnpkg.com/apollo-codegen/-/apollo-codegen-0.10.12.tgz#5f44f967dc898551c149c8de80101ba59a640148"
   dependencies:
     babel-runtime "^6.20.0"
     change-case "^3.0.0"
     glob "^7.0.5"
-    graphql "^0.9.1"
+    graphql "^0.9.5"
     inflected "^1.1.7"
     mkdirp "^0.5.1"
     node-fetch "^1.5.3"
@@ -2276,17 +2276,17 @@ graphql@^0.7.2:
   dependencies:
     iterall "1.0.2"
 
-graphql@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.9.1.tgz#f4d154cbec054d4a5d3b1be95f23435c09aa86c8"
-  dependencies:
-    iterall "1.0.3"
-
 graphql@^0.9.3:
   version "0.9.3"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.9.3.tgz#71fc0fa331bffb9c20678485861cfb370803118e"
   dependencies:
     iterall "1.0.3"
+
+graphql@^0.9.5:
+  version "0.9.5"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.9.5.tgz#efe588b98fe3ce036d7d55b4ad940daed56c4622"
+  dependencies:
+    iterall "^1.0.0"
 
 growl@1.9.2:
   version "1.9.2"
@@ -2901,7 +2901,7 @@ iterall@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.0.2.tgz#41a2e96ce9eda5e61c767ee5dc312373bb046e91"
 
-iterall@1.0.3:
+iterall@1.0.3, iterall@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.0.3.tgz#e0b31958f835013c323ff0b10943829ac69aa4b7"
 
@@ -4890,13 +4890,7 @@ rx@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
 
-rxjs@^5.0.1:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.2.0.tgz#db537de8767c05fa73721587a29e0085307d318b"
-  dependencies:
-    symbol-observable "^1.0.1"
-
-rxjs@^5.3.0:
+rxjs@^5.0.1, rxjs@^5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.3.0.tgz#d88ccbdd46af290cbdb97d5d8055e52453fabe2d"
   dependencies:

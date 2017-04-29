@@ -1,12 +1,7 @@
-import {
-  Component,
-  Input,
-  ChangeDetectionStrategy,
-  OnInit,
-} from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { ValidationService } from '../../../services/validation.service';
+import { ValidationService } from 'app/app-module/services/validation.service';
 
 
 @Component({
@@ -21,8 +16,7 @@ export class AppMessagesComponent implements OnInit {
 
   @Input('messageSource') messageSource$: Observable<any>;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
     this.message$ = this.messageSource$

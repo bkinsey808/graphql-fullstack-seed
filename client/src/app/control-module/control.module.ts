@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ValidationService } from './services/validation.service';
+import { ValidationService } from '../app-module/services/validation.service';
 import { AppMessagesComponent } from './components/control/messages/messages.component';
 import { ControlComponent } from './components/control/control.component';
 import { InputComponent } from './components/control/input/input.component';

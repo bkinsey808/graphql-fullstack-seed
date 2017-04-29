@@ -1,25 +1,14 @@
 declare var require: any;
 
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-} from '@angular/core';
-import {
-  Validators,
-  FormGroup,
-  FormControl,
-} from '@angular/forms';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import { MutationOptions } from 'apollo-client'
-import {
-  ApolloQueryResult,
-  ApolloError
-} from 'apollo-client';
+import { ApolloQueryResult, ApolloError } from 'apollo-client';
 import { DocumentNode } from 'graphql';
 import { Observer } from 'rxjs';
 
-import { ValidationService } from 'app/control-module/services/validation.service';
+import { ValidationService } from 'app/app-module/services/validation.service';
 import { AuthService } from 'app/app-module/services/auth.service';
 import { RegisterMutation } from '../../../graphql/schema';
 

@@ -1,25 +1,14 @@
 declare var require: any;
 
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-} from '@angular/core';
-import {
-  Validators,
-  FormGroup,
-  FormControl,
-} from '@angular/forms';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import { MutationOptions } from 'apollo-client'
-import {
-  ApolloQueryResult,
-  ApolloError
-} from 'apollo-client';
+import { ApolloQueryResult, ApolloError } from 'apollo-client';
 import { DocumentNode } from 'graphql';
 import { Observer } from 'rxjs';
 
-import { ValidationService } from 'app/control-module/services/validation.service';
+import { ValidationService } from 'app/app-module/services/validation.service';
 import { AuthService } from 'app/app-module/services/auth.service';
 import { LoginMutation } from '../../../graphql/schema';
 
@@ -42,7 +31,6 @@ export class LoginComponent {
 
   constructor(
     private apollo: Apollo,
-    private cdr: ChangeDetectorRef,
   ) {
     this.initForm();
   }
@@ -65,17 +53,15 @@ export class LoginComponent {
   }
 
   getLoginObserver(): Observer<ApolloQueryResult<LoginMutation>> {
-    const next = ({ data }) => {
-      console.log('logged in user', data);
+    const next = ({ data }) =>
       AuthService.setJwtToken(data.login.token);
-    };
     const error = (error) => {
       if (error instanceof ApolloError) {
-        const errorMessages =
-          error.graphQLErrors.map((graphqlError) => graphqlError.message);
+        const errorMessages = error.graphQLErrors.map(
+          (graphqlError) => graphqlError.message
+        );
         if (errorMessages.includes('loginFailed')) {
           this.form.setErrors({ loginFailed: true });
-          this.cdr.detectChanges();
         }
       }
       console.log('keys', Object.keys(this.form.controls));
@@ -88,10 +74,7 @@ export class LoginComponent {
   getLoginMutationOptions(): MutationOptions {
     return {
       mutation: LoginMutationNode,
-      variables: {
-        usernameOrEmail: this.form.value.usernameOrEmail,
-        password: this.form.value.password,
-      },
+      variables: this.form.value,
     };
   }
 

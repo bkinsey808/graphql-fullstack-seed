@@ -4,11 +4,15 @@
   [formGroup]="form"
   (submit)="submit()"
 >
-  <div class="form-controls">
 
+  <div bkngErrors="form">
     <div
-      *ngIf="form.hasError('loginFailed')"
-    >Login Failed</div>
+      bkngError="loginFailed"
+      [when]="['dirty', 'touched']"
+    >The login has failed</div>
+  </div>
+
+  <div class="form-controls">
 
     <md-input-container style="width: 100%">
       <input
