@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  AbstractControl,
-  ValidatorFn
-} from '@angular/forms';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 @Injectable()
 export class ValidationService {
@@ -54,6 +51,15 @@ export class ValidationService {
         return { minAndMaxLengthError: options };
       }
       return null;
+    }
+  }
+
+  static getErrorReducer(errorMessages) {
+    return (errors, handledError) => {
+      if (errorMessages.includes(handledError)) {
+        errors[handledError] = true;
+      }
+      return errors;
     }
   }
 

@@ -5,9 +5,9 @@
   (submit)="submit()"
 >
 
-  <div bkngErrors="form">
+  <div ngxErrors>
     <div
-      bkngError="loginFailed"
+      ngxError="loginFailed"
       [when]="['dirty', 'touched']"
     >The login has failed</div>
   </div>

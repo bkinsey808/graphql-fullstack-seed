@@ -56,10 +56,15 @@ export class RegisterComponent {
     };
     const error = (error) => {
       if (error instanceof ApolloError) {
-        const errorMessages =
-          error.graphQLErrors.map((graphqlError) => graphqlError.message);
-        if (errorMessages.includes('RegisterFailed')) {
-          this.form.setErrors({ RegisterFailed: true });
+        const handledErrors =
+          ['emailExists', 'usernameExists', 'registerFailed'];
+        const errorMessages = error.graphQLErrors.map(
+          graphqlError => graphqlError.message
+        );
+        const reducer = ValidationService.getErrorReducer(errorMessages);
+        const errors = handledErrors.reduce(reducer, {});
+        if (errors !== {}) {
+          this.form.setErrors(errors);
           this.cdr.detectChanges();
         }
       }
@@ -83,6 +88,5 @@ export class RegisterComponent {
     )
       .subscribe(this.getRegisterObserver());
   }
-
 
 }

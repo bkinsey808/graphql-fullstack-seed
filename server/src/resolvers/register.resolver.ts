@@ -33,13 +33,13 @@ export const registerResolver = (objectApi: ObjectApi) =>
     } catch (exception) {
       if (exception.message.startsWith('duplicate key value')) {
         if (exception.constraint === 'app_user_email_key') {
-          throw new Error('Email Address already registered.');
+          throw new Error('emailExists');
         } else if (exception.constraint === 'app_user_username_key'){
-          throw new Error('Username already registered.');
+          throw new Error('usernameExists');
         }
       } else {
         console.log(exception);
-        throw new Error('Unknown error while trying to register. Please try again later.');
+        throw new Error('registerFailed');
       }
     }
     return {

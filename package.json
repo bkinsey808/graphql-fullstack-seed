@@ -32,7 +32,6 @@
   ],
   "author": "Ben Kinsey",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.0.0",
