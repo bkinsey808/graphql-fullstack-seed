@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { ApolloError } from 'apollo-client';
+
 
 @Injectable()
 export class ValidationService {
@@ -61,6 +63,23 @@ export class ValidationService {
       }
       return errors;
     }
+  }
+
+  static getErrorHandler({handledErrors, form}) {
+    return (error) => {
+      if (error instanceof ApolloError) {
+        const errorMessages = error.graphQLErrors.map(
+          graphqlError => graphqlError.message
+        );
+        const reducer = ValidationService.getErrorReducer(errorMessages);
+        const errors = handledErrors.reduce(reducer, {});
+        if (errors !== {}) {
+          form.setErrors(errors);
+        }
+      }
+      console.log('keys', Object.keys(form.controls));
+      console.log('there was an error sending the query', error);
+    };
   }
 
   constructor() { }

@@ -29,9 +29,7 @@ export class LoginComponent {
   public usernameOrEmail: FormControl;
   public password: FormControl;
 
-  constructor(
-    private apollo: Apollo,
-  ) {
+  constructor(private apollo: Apollo) {
     this.initForm();
   }
 
@@ -55,18 +53,11 @@ export class LoginComponent {
   getLoginObserver(): Observer<ApolloQueryResult<LoginMutation>> {
     const next = ({ data }) =>
       AuthService.setJwtToken(data.login.token);
-    const error = (error) => {
-      if (error instanceof ApolloError) {
-        const errorMessages = error.graphQLErrors.map(
-          (graphqlError) => graphqlError.message
-        );
-        if (errorMessages.includes('loginFailed')) {
-          this.form.setErrors({ loginFailed: true });
-        }
-      }
-      console.log('keys', Object.keys(this.form.controls));
-      console.log('there was an error sending the query', error);
-    };
+    const handledErrors = ['loginFailed'];
+    const error = ValidationService.getErrorHandler({
+      handledErrors,
+      form: this.form,
+    });
     const complete = () => console.log('complete');
     return { next, error, complete };
   }

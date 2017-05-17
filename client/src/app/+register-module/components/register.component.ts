@@ -4,7 +4,7 @@ import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import { MutationOptions } from 'apollo-client'
-import { ApolloQueryResult, ApolloError } from 'apollo-client';
+import { ApolloQueryResult } from 'apollo-client';
 import { DocumentNode } from 'graphql';
 import { Observer } from 'rxjs';
 
@@ -30,17 +30,17 @@ export class RegisterComponent {
   public email: FormControl;
   public password: FormControl;
 
-  constructor(
-    private apollo: Apollo,
-    private cdr: ChangeDetectorRef,
-  ) {
+  constructor(private apollo: Apollo) {
     this.initForm();
   }
 
   initForm() {
     this.username = new FormControl('', Validators.required);
     this.password = new FormControl('', ValidationService.passwordValidator);
-    this.email = new FormControl('', ValidationService.emailValidator);
+    this.email = new FormControl('', [
+      Validators.required,
+      ValidationService.emailValidator,
+    ]);
 
     this.form = new FormGroup({
       username: this.username,
@@ -54,23 +54,12 @@ export class RegisterComponent {
       console.log('logged in user', data);
       AuthService.setJwtToken(data.register.token);
     };
-    const error = (error) => {
-      if (error instanceof ApolloError) {
-        const handledErrors =
-          ['emailExists', 'usernameExists', 'registerFailed'];
-        const errorMessages = error.graphQLErrors.map(
-          graphqlError => graphqlError.message
-        );
-        const reducer = ValidationService.getErrorReducer(errorMessages);
-        const errors = handledErrors.reduce(reducer, {});
-        if (errors !== {}) {
-          this.form.setErrors(errors);
-          this.cdr.detectChanges();
-        }
-      }
-      console.log('keys', Object.keys(this.form.controls));
-      console.log('there was an error sending the query', error);
-    };
+    const handledErrors =
+      ['emailExists', 'usernameExists', 'registerFailed'];
+    const error = ValidationService.getErrorHandler({
+      handledErrors,
+      form: this.form,
+    });
     const complete = () => console.log('complete');
     return { next, error, complete };
   }
