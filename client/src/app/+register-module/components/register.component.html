@@ -1,98 +1,10 @@
 <h2>Register a new User</h2>
-<form
-  [formGroup]="form"
-  (submit)="submit()"
->
-  <!--<app-register-form-error></app-register-form-error>-->
 
-  <md-input-container
-    bkErrors="email"
-    style="width: 100%"
-  >
-    <input
-      mdInput
-      placeholder="Email Address"
-      formControlName="email"
-      required
-    >
- {{formControlChanges$ | async | json }}
-
-  </md-input-container>
-
-
-  <!--<error-list
-    [control]="email"
-  ></error-list>
--->
-
-    <!--<div
-      ngxErrors="email"
-      #emailError="ngxErrors"
-    >
-      <div
-        ngxError="required"
-        [when]="['dirty', 'touched']"
-      >Email Address is required</div>
-      <div
-        ngxError="minAndMaxLengthError"
-        [when]="['dirty', 'touched']"
-      >
-        Email Address must be min length
-        {{
-          emailError.getError('minAndMaxLengthError')?.minLength
-        }}
-        and max length
-        {{
-          emailError.getError('minAndMaxLengthError')?.maxLength
-        }}
-      </div>
-    </div>-->
-
-
-  <md-input-container style="width: 100%">
-    <input
-      mdInput
-      placeholder="Username"
-      formControlName="username"
-      required
-    >
-  </md-input-container>
-  <!--<app-register-username-error></app-register-username-error>-->
-
-  <md-input-container style="width: 100%">
-    <input
-      mdInput
-      placeholder="Password"
-      formControlName="password"
-      type="password"
-      required
-    >
-  </md-input-container>
-  <!--<div
-    ngxErrors="password"
-    #passwordError="ngxErrors"
-  >
-    <div
-      ngxError="required"
-      [when]="['dirty', 'touched']"
-    >Password is required</div>
-    <div
-      ngxError="minAndMaxLengthError"
-      [when]="['dirty', 'touched']"
-    >
-      Password must be min length
-      {{
-        passwordError.getError('minAndMaxLengthError')?.minLength
-      }}
-      and max length
-      {{
-        passwordError.getError('minAndMaxLengthError')?.maxLength
-      }}
-    </div>
-  </div>-->
-
-  <button
-    type="submit"
-    [disabled]="!form.valid"
-  >Submit</button>
+<form #form focusFix [formGroup]="formGroup">
+  <dynamic-form-material-control
+    *ngFor="let controlModel of formModel"
+    [group]="formGroup"
+    [model]="controlModel"
+  ></dynamic-form-material-control>
+  <button type="submit" [disabled]="!form.valid">Submit</button>
 </form>
