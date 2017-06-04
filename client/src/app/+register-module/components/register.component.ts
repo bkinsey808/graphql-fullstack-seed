@@ -30,6 +30,8 @@ export class RegisterComponent implements OnInit {
   formModel: DynamicFormControlModel[] = REGISTER_FORM_MODEL;
   formGroup: FormGroup;
 
+  public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+
   constructor(
     private apollo: Apollo,
     private formService: DynamicFormService,

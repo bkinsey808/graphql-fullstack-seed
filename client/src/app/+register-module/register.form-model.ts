@@ -11,6 +11,7 @@ export const REGISTER_FORM_MODEL: DynamicFormControlModel[] = [
     id: 'username',
     maxLength: 42,
     placeholder: 'Username',
+    mask: "0000-00-00",
     autoFocus: true,
     validators: {
       required: null,
