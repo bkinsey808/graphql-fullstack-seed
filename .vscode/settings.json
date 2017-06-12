@@ -2,4 +2,9 @@
 {
   "editor.tabSize": 2,
   "editor.minimap.enabled": true,
+  "editor.formatOnSave": true,
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "prettier.trailingComma": "all",
+  "html.format.wrapLineLength": 80
 }

@@ -1,20 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
 
-import { LoginComponent } from './components/login.component';
-import { routing } from './login.routing';
-
+import { routing } from './login.routing'
+import { AppFormModule } from '../app-form-module/app-form.module'
+import { LoginComponent } from './components/login.component'
 
 @NgModule({
-  imports: [
-    routing,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MaterialModule,
-  ],
-  declarations: [ LoginComponent ]
+  imports: [routing, CommonModule, AppFormModule],
+  declarations: [LoginComponent],
 })
-export class LoginModule { }
+export class LoginModule {}

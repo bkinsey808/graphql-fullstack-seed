@@ -1,69 +1,7 @@
 <h2>Login</h2>
 
-<form
-  [formGroup]="form"
-  (submit)="submit()"
->
-
-  <div ngxErrors>
-    <div
-      ngxError="loginFailed"
-      [when]="['dirty', 'touched']"
-    >The login has failed</div>
-  </div>
-
-  <div class="form-controls">
-
-    <md-input-container style="width: 100%">
-      <input
-        mdInput
-        placeholder="Username or Email Address"
-        formControlName="usernameOrEmail"
-        required
-      >
-    </md-input-container>
-    <div
-      ngxErrors="usernameOrEmail"
-      #usernameOrEmailError="ngxErrors"
-    >
-      <div
-        ngxError="required"
-        [when]="['dirty', 'touched']"
-      >Username or Email Address is required</div>
-      <div
-        ngxError="minAndMaxLengthError"
-        [when]="['dirty', 'touched']"
-      >
-        Username or Email Address must be min length
-        {{
-          usernameOrEmailError.getError('minAndMaxLengthError')?.minLength
-        }}
-        and max length
-        {{
-          usernameOrEmailError.getError('minAndMaxLengthError')?.maxLength
-        }}
-      </div>
-    </div>
-
-    <md-input-container style="width: 100%">
-      <input
-        mdInput
-        placeholder="Password"
-        type="password"
-        formControlName="password"
-        required
-      >
-    </md-input-container>
-    <div ngxErrors="password">
-      <div
-        ngxError="invalidPassword"
-        [when]="['dirty', 'touched']"
-      >Password is not valid</div>
-    </div>
-  </div>
-
-  <button
-    type="submit"
-    [disabled]="!form.valid"
-  >Submit</button>
+<form bkngFocusFix [formGroup]="formGroup">
+  <dynamic-form-material-control *ngFor="let controlModel of formModel" [group]="formGroup"
+    [model]="controlModel"></dynamic-form-material-control>
+  <button type="submit">Submit</button>
 </form>

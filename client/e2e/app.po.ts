@@ -1,11 +1,11 @@
-import { browser, element, by } from 'protractor';
+import { browser, by, element } from 'protractor';
 
-export class AngularGraphqlFullstackSeedClientPage {
+export class BkngAngularGraphqlFullstackSeedPage {
   navigateTo() {
     return browser.get('/');
   }
 
   getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+    return element(by.css('bkng-root h1')).getText();
   }
 }

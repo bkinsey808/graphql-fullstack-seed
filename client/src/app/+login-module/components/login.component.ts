@@ -1,79 +1,66 @@
-declare var require: any;
+declare var require: any
 
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { Validators, FormGroup, FormControl } from '@angular/forms';
-import { Apollo } from 'apollo-angular';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core'
+import { Validators, FormGroup, FormControl } from '@angular/forms'
+import { Apollo } from 'apollo-angular'
 import { MutationOptions } from 'apollo-client'
-import { ApolloQueryResult, ApolloError } from 'apollo-client';
-import { DocumentNode } from 'graphql';
-import { Observer } from 'rxjs';
+import { ApolloQueryResult, ApolloError } from 'apollo-client'
+import { DocumentNode } from 'graphql'
+import { Observer } from 'rxjs/Observer'
+import {
+  DynamicFormControlModel,
+  DynamicFormService,
+} from '@ng2-dynamic-forms/core'
 
-import { ValidationService } from 'app/app-module/services/validation.service';
-import { AuthService } from 'app/app-module/services/auth.service';
-import { LoginMutation } from '../../../graphql/schema';
+import { LOGIN_FORM_MODEL } from '../login.form-model'
 
+import { ValidationService } from 'app/app-module/services/validation.service'
+import { AuthService } from 'app/app-module/services/auth.service'
+import { LoginMutation } from '../../../graphql/schema'
 
 // todo figure out how to refactor this to not use require
-const LoginMutationNode: DocumentNode =
-  require('graphql-tag/loader!../../../graphql/Login.graphql');
+const LoginMutationNode: DocumentNode = require('graphql-tag/loader!../../../graphql/Login.graphql')
 
 @Component({
-  selector: 'app-login',
+  selector: 'bkng-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  formModel: DynamicFormControlModel[] = LOGIN_FORM_MODEL
+  formGroup: FormGroup
 
-  public form: FormGroup;
-  public usernameOrEmail: FormControl;
-  public password: FormControl;
+  constructor(
+    private apollo: Apollo,
+    private formService: DynamicFormService,
+  ) {}
 
-  constructor(private apollo: Apollo) {
-    this.initForm();
-  }
-
-  initForm() {
-    this.usernameOrEmail =
-      new FormControl('', [
-        Validators.required,
-        ValidationService.minAndMaxLengthValidator({
-          minLength: 2,
-          maxLength: 12,
-      })]);
-    this.password =
-      new FormControl('', ValidationService.passwordValidator);
-
-    this.form = new FormGroup({
-      usernameOrEmail: this.usernameOrEmail,
-      password: this.password,
-    });
+  ngOnInit() {
+    this.formGroup = this.formService.createFormGroup(this.formModel)
   }
 
   getLoginObserver(): Observer<ApolloQueryResult<LoginMutation>> {
-    const next = ({ data }) =>
-      AuthService.setJwtToken(data.login.token);
-    const handledErrors = ['loginFailed'];
+    const next = ({ data }) => AuthService.setJwtToken(data.login.token)
+    const handledErrors = ['loginFailed']
     const error = ValidationService.getErrorHandler({
       handledErrors,
-      form: this.form,
-    });
-    const complete = () => console.log('complete');
-    return { next, error, complete };
+      form: this.formGroup,
+    })
+    const complete = () => console.log('complete')
+    return { next, error, complete }
   }
 
   getLoginMutationOptions(): MutationOptions {
     return {
       mutation: LoginMutationNode,
-      variables: this.form.value,
-    };
+      variables: this.formGroup.value,
+    }
   }
 
   submit() {
-    this.apollo.mutate<LoginMutation>(
-      this.getLoginMutationOptions()
-    )
-      .subscribe(this.getLoginObserver());
+    this.apollo
+      .mutate<LoginMutation>(this.getLoginMutationOptions())
+      .subscribe(this.getLoginObserver())
   }
-
 }

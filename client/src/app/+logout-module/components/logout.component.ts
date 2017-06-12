@@ -1,24 +1,17 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  OnInit
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core'
 
-
-import { AuthService } from 'app/app-module/services/auth.service';
+import { AuthService } from 'app/app-module/services/auth.service'
 
 @Component({
-  selector: 'app-logout',
+  selector: 'bkng-logout',
   templateUrl: './logout.component.html',
   styleUrls: ['./logout.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogoutComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-    AuthService.logout();
+    AuthService.logout()
   }
-
 }

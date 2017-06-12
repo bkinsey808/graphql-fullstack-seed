@@ -1,21 +1,13 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  OnInit
-} from '@angular/core';
-
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core'
 
 @Component({
-  selector: 'app-home',
+  selector: 'bkng-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

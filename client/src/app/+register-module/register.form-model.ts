@@ -2,37 +2,33 @@ import {
   DynamicFormControlModel,
   DynamicCheckboxModel,
   DynamicInputModel,
-  DynamicRadioGroupModel
-} from '@ng2-dynamic-forms/core';
+  DynamicRadioGroupModel,
+} from '@ng2-dynamic-forms/core'
 
 export const REGISTER_FORM_MODEL: DynamicFormControlModel[] = [
-
   new DynamicInputModel({
     id: 'username',
     maxLength: 42,
     placeholder: 'Username',
-    mask: "0000-00-00",
     autoFocus: true,
     validators: {
       required: null,
     },
     errorMessages: {
-      required: '{{placeholder}} is required.'
-    }
+      required: '{{placeholder}} is required.',
+    },
   }),
 
   new DynamicInputModel({
     id: 'emailAddress',
     maxLength: 42,
-    placeholder: 'Email Address'
+    placeholder: 'Email Address',
   }),
 
   new DynamicInputModel({
     id: 'password',
     maxLength: 42,
     inputType: 'password',
-    placeholder: 'Password'
+    placeholder: 'Password',
   }),
-
-
-];
+]

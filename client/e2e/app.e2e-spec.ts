@@ -1,14 +1,14 @@
-import { AngularGraphqlFullstackSeedClientPage } from './app.po';
+import { BkngAngularGraphqlFullstackSeedPage } from './app.po';
 
-describe('angular-graphql-fullstack-seed-client App', () => {
-  let page: AngularGraphqlFullstackSeedClientPage;
+describe('bkng-angular-graphql-fullstack-seed App', () => {
+  let page: BkngAngularGraphqlFullstackSeedPage;
 
   beforeEach(() => {
-    page = new AngularGraphqlFullstackSeedClientPage();
+    page = new BkngAngularGraphqlFullstackSeedPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getParagraphText()).toEqual('Welcome to bkng!!');
   });
 });
