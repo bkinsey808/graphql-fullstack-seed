@@ -8,6 +8,7 @@ import {
 export const REGISTER_FORM_MODEL: DynamicFormControlModel[] = [
   new DynamicInputModel({
     id: 'username',
+    minLength: 3,
     maxLength: 42,
     placeholder: 'Username',
     autoFocus: true,
